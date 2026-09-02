@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "evidence_id": "EVIDENCE-FAIL-0001",
+  "evidence_type": "watermark",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "green-list statistical watermark detector",
+  "maturity": "emerging",
+  "observation": {
+    "signal_detected": true,
+    "sample_count": 120,
+    "sampling_policy": "controlled_probe_set_v1"
+  },
+  "statistic": 5.27,
+  "threshold": 4.0,
+  "calibration_ref": "CALIBRATION:watermark-detector-v1",
+  "assumptions": [
+    "probe prompts were selected before evaluation"
+  ],
+  "limitations": [
+    "watermark detection alone does not prove derivation"
+  ],
+  "artifact_refs": [
+    "ARTIFACT:probe-output-set-0001"
+  ],
+  "collected_at": "2026-09-02T00:00:00Z",
+  "collected_by": "AUDITOR:reference-node",
+  "challenge_status": "unchallenged"
+}

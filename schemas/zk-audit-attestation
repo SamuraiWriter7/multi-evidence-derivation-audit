@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.1/zk-audit-attestation.schema.json",
+  "title": "Zero-Knowledge Audit Attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attestation_id",
+    "predicate",
+    "proof_system",
+    "public_inputs",
+    "proof_ref",
+    "verification_status",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "attestation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "predicate": {
+      "type": "string",
+      "minLength": 1
+    },
+    "predicate_version": {
+      "type": ["string", "null"]
+    },
+    "proof_system": {
+      "type": "string",
+      "minLength": 1
+    },
+    "public_inputs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "committed_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "proof_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "failed",
+        "not_verified"
+      ]
+    },
+    "scope_note": {
+      "type": "string",
+      "default": "This attestation proves only the declared predicate and does not independently establish causal derivation, legal liability, or royalty obligation."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

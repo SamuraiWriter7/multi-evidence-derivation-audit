@@ -1,0 +1,27 @@
+{
+  "schema_version": "0.1.0",
+  "assessment_id": "ASSESSMENT-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003"
+  ],
+  "assessment_state": "supported",
+  "confidence": 0.82,
+  "assessment_basis": [
+    "watermark evidence produced a signal above the declared detection threshold",
+    "signed API access receipts overlap with the relevant training period",
+    "independent similarity evidence supports a possible derivation relationship"
+  ],
+  "conflicting_evidence_refs": [],
+  "limitations": [
+    "no white-box training artifacts were available",
+    "the assessment does not independently establish legal infringement",
+    "the confidence value represents protocol-level evidentiary confidence rather than legal probability"
+  ],
+  "legal_effect": "policy_dependent",
+  "protocol_version": "0.1.0",
+  "created_at": "2026-09-02T00:10:00Z"
+}

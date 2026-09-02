@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.1/audit-evidence-record.schema.json",
+  "title": "Audit Evidence Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "evidence_type",
+    "origin_ref",
+    "derivative_ref",
+    "method",
+    "maturity",
+    "observation",
+    "collected_at",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "watermark",
+        "signed_receipt",
+        "api_trace",
+        "dataset_manifest",
+        "training_attestation",
+        "similarity",
+        "white_box_lineage",
+        "other"
+      ]
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "maturity": {
+      "type": "string",
+      "enum": [
+        "established",
+        "emerging",
+        "experimental"
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": true,
+      "minProperties": 1
+    },
+    "statistic": {
+      "type": ["number", "null"]
+    },
+    "threshold": {
+      "type": ["number", "null"]
+    },
+    "calibration_ref": {
+      "type": ["string", "null"]
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "collected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "collected_by": {
+      "type": ["string", "null"]
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "digest"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha384",
+            "sha512",
+            "other"
+          ]
+        },
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "challenge_status": {
+      "type": "string",
+      "enum": [
+        "unchallenged",
+        "challenged",
+        "under_review",
+        "invalidated"
+      ],
+      "default": "unchallenged"
+    }
+  }
+}

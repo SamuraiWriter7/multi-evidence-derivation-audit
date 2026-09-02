@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0",
+  "attestation_id": "ZK-ATTESTATION-FAIL-0001",
+  "predicate": "The committed evidence satisfies audit-predicate-v1.",
+  "predicate_version": "audit-predicate-v1",
+  "proof_system": "reference-zk-proof-system",
+  "public_inputs": {
+    "origin_ref": "MODEL:origin-alpha:v1",
+    "derivative_ref": "MODEL:student-beta:v1",
+    "audit_rule_ref": "AUDIT-RULE:watermark-threshold-v1",
+    "threshold": 4.0,
+    "protocol_version": "0.1.0"
+  },
+  "committed_inputs": [
+    "EVIDENCE-0001"
+  ],
+  "proof_ref": "PROOF:zk-audit-fail-0001",
+  "verification_status": "accepted",
+  "scope_note": "This attestation proves only the declared predicate and does not independently establish causal derivation, legal liability, or royalty obligation.",
+  "created_at": "2026-09-02T00:20:00Z"
+}

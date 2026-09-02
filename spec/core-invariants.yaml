@@ -1,0 +1,54 @@
+protocol:
+  name: Multi-Evidence Derivation Audit Protocol
+  version: 0.1.0
+
+core_invariants:
+
+  - id: MEDA-A1
+    name: evidence_not_verdict
+    rule: >
+      No individual detection signal or evidence item
+      SHALL by itself constitute a derivation verdict.
+
+  - id: MEDA-A2
+    name: no_automatic_right_creation
+    rule: >
+      Audit evidence SHALL NOT autonomously create,
+      modify, or extinguish copyright, license,
+      royalty, liability, or settlement obligations.
+
+  - id: MEDA-A3
+    name: reproducible_assessment
+    rule: >
+      Every derivation assessment SHALL reference
+      the evidence, methods, parameters, assumptions,
+      and protocol version used to produce it.
+
+  - id: MEDA-A4
+    name: attestation_scope
+    rule: >
+      Cryptographic and zero-knowledge attestations
+      SHALL prove only explicitly declared predicates
+      or computations and SHALL NOT imply undeclared
+      causal or legal conclusions.
+
+  - id: MEDA-A5
+    name: dispute_separation
+    rule: >
+      Materially conflicting or challenged evidence
+      SHALL remain distinguishable from
+      settlement-ready evidence.
+
+  - id: MEDA-A6
+    name: evidence_provenance
+    rule: >
+      Every evidence item SHALL preserve sufficient
+      provenance to identify its source, collection
+      method, integrity state, and relevant context.
+
+  - id: MEDA-A7
+    name: maturity_visibility
+    rule: >
+      Experimental evidence methods SHALL be explicitly
+      distinguishable from established or emerging
+      methods.

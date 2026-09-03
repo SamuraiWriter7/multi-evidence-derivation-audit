@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "fusion_id": "FUSION-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "relationship_refs": [
+    "REL-0001",
+    "REL-0002"
+  ],
+  "supporting_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "counter_evidence_refs": [],
+  "redundant_evidence_refs": [
+    "EVIDENCE-0003"
+  ],
+  "effective_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0004"
+  ],
+  "evidence_diversity": 3,
+  "fusion_result": "strong_support",
+  "confidence": 0.86,
+  "basis": [
+    "multiple materially different evidence channels support the derivation hypothesis",
+    "EVIDENCE-0003 was discounted as redundant because it derives from the same underlying event as EVIDENCE-0002",
+    "three materially effective evidence channels remain after dependency analysis",
+    "no material counter-evidence was identified in this fusion run"
+  ],
+  "uncertainty_factors": [
+    "complete training data was not available for direct inspection",
+    "some evidence methods remain sensitive to transformation or spoofing"
+  ],
+  "limitations": [
+    "fusion confidence is protocol-level evidentiary confidence rather than legal probability",
+    "strong support does not independently establish infringement or royalty liability"
+  ],
+  "fusion_policy_ref": "FUSION-POLICY:MEDA-v0.2-reference",
+  "created_at": "2026-09-03T00:10:00Z"
+}

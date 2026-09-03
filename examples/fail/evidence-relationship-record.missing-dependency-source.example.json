@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.2.0",
+  "relationship_id": "REL-FAIL-0001",
+  "evidence_refs": [
+    "EVIDENCE-0002",
+    "EVIDENCE-0003"
+  ],
+  "dependency_type": "same_source",
+  "evidentiary_effect": "corroborating",
+  "basis": [
+    "both evidence records are claimed to originate from the same underlying event"
+  ],
+  "confidence": 1.0,
+  "assumptions": [
+    "the claimed dependency relationship is otherwise correctly identified"
+  ],
+  "limitations": [
+    "the source of the dependency has not been identified"
+  ],
+  "created_at": "2026-09-03T01:05:00Z"
+}

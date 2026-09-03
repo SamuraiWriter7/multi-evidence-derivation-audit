@@ -1,27 +1,33 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "assessment_id": "ASSESSMENT-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
   "derivative_ref": "MODEL:student-beta:v1",
   "evidence_refs": [
     "EVIDENCE-0001",
     "EVIDENCE-0002",
-    "EVIDENCE-0003"
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "fusion_refs": [
+    "FUSION-0001"
   ],
   "assessment_state": "supported",
-  "confidence": 0.82,
+  "confidence": 0.86,
   "assessment_basis": [
-    "watermark evidence produced a signal above the declared detection threshold",
-    "signed API access receipts overlap with the relevant training period",
-    "independent similarity evidence supports a possible derivation relationship"
+    "the referenced evidence fusion produced strong protocol-level support",
+    "multiple materially different evidence channels remain after redundancy analysis",
+    "same-source evidence was not counted as fully independent",
+    "no material counter-evidence was identified in the referenced fusion"
   ],
   "conflicting_evidence_refs": [],
   "limitations": [
-    "no white-box training artifacts were available",
-    "the assessment does not independently establish legal infringement",
-    "the confidence value represents protocol-level evidentiary confidence rather than legal probability"
+    "no complete white-box training history was available",
+    "the assessment does not independently establish copyright infringement",
+    "the confidence value represents evidentiary confidence under the referenced protocol rather than legal probability"
   ],
+  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.2-reference",
   "legal_effect": "policy_dependent",
-  "protocol_version": "0.1.0",
-  "created_at": "2026-09-02T00:10:00Z"
+  "protocol_version": "0.2.0",
+  "created_at": "2026-09-03T00:15:00Z"
 }

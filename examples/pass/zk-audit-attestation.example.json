@@ -1,15 +1,16 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "attestation_id": "ZK-ATTESTATION-0001",
-  "predicate": "The committed audit evidence set satisfies audit-predicate-v1 using the declared detector parameters and threshold.",
-  "predicate_version": "audit-predicate-v1",
+  "predicate": "The committed audit evidence satisfies the declared audit predicate using the referenced detector parameters and threshold.",
+  "predicate_version": "audit-predicate-v2",
+  "audit_context_ref": "FUSION:FUSION-0001",
   "proof_system": "reference-zk-proof-system",
   "public_inputs": {
     "origin_ref": "MODEL:origin-alpha:v1",
     "derivative_ref": "MODEL:student-beta:v1",
-    "audit_rule_ref": "AUDIT-RULE:watermark-threshold-v1",
+    "audit_rule_ref": "AUDIT-RULE:watermark-threshold-v2",
     "threshold": 4.0,
-    "protocol_version": "0.1.0"
+    "protocol_version": "0.2.0"
   },
   "committed_inputs": [
     "EVIDENCE-0001",
@@ -17,7 +18,9 @@
     "ARTIFACT:detector-config-0001"
   ],
   "proof_ref": "PROOF:zk-audit-0001",
+  "verification_method_ref": "VERIFIER-METHOD:reference-v1",
+  "verifier_ref": "VERIFIER:reference-node",
   "verification_status": "verified",
-  "scope_note": "This attestation proves only the declared predicate and does not independently establish causal derivation, legal liability, or royalty obligation.",
-  "created_at": "2026-09-02T00:20:00Z"
+  "scope_note": "This attestation proves only the declared audit predicate and does not independently establish causal derivation, legal liability, copyright infringement, or royalty obligation.",
+  "created_at": "2026-09-03T00:20:00Z"
 }

@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.1/audit-evidence-record.schema.json",
+  "$id": "https://example.org/meda/v0.2/audit-evidence-record.schema.json",
   "title": "Audit Evidence Record",
+  "description": "A machine-readable record describing one item of evidence relevant to a possible derivation relationship. An evidence record is not itself a derivation verdict.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -18,7 +19,8 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1.0"
+      "type": "string",
+      "const": "0.2.0"
     },
     "evidence_id": {
       "type": "string",
@@ -59,22 +61,48 @@
     },
     "observation": {
       "type": "object",
-      "additionalProperties": true,
-      "minProperties": 1
+      "minProperties": 1,
+      "additionalProperties": true
     },
     "statistic": {
-      "type": ["number", "null"]
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "threshold": {
-      "type": ["number", "null"]
+      "type": [
+        "number",
+        "null"
+      ]
     },
     "calibration_ref": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_event_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Reference to the underlying event from which this evidence was derived, when known."
+    },
+    "source_artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
     },
     "assumptions": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       },
       "uniqueItems": true,
       "default": []
@@ -82,7 +110,8 @@
     "limitations": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       },
       "uniqueItems": true,
       "default": []
@@ -90,7 +119,8 @@
     "artifact_refs": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       },
       "uniqueItems": true,
       "default": []
@@ -100,7 +130,10 @@
       "format": "date-time"
     },
     "collected_by": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "integrity": {
       "type": "object",

@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.2.0",
+  "fusion_id": "FUSION-FAIL-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002"
+  ],
+  "relationship_refs": [
+    "REL-0001"
+  ],
+  "supporting_evidence_refs": [
+    "EVIDENCE-0001"
+  ],
+  "counter_evidence_refs": [],
+  "redundant_evidence_refs": [],
+  "effective_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002"
+  ],
+  "evidence_diversity": 2,
+  "fusion_result": "conflicted",
+  "confidence": 0.5,
+  "basis": [
+    "the fusion result is declared conflicted"
+  ],
+  "uncertainty_factors": [
+    "the evidentiary picture is unresolved"
+  ],
+  "limitations": [
+    "no explicit counter-evidence reference was supplied"
+  ],
+  "fusion_policy_ref": "FUSION-POLICY:MEDA-v0.2-reference",
+  "created_at": "2026-09-03T01:10:00Z"
+}

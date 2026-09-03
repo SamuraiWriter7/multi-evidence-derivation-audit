@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "evidence_id": "EVIDENCE-FAIL-0001",
   "evidence_type": "watermark",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -8,22 +8,25 @@
   "maturity": "emerging",
   "observation": {
     "signal_detected": true,
-    "sample_count": 120,
-    "sampling_policy": "controlled_probe_set_v1"
+    "sample_count": 120
   },
   "statistic": 5.27,
   "threshold": 4.0,
   "calibration_ref": "CALIBRATION:watermark-detector-v1",
+  "source_event_ref": "EVENT:probe-session-fail-0001",
+  "source_artifact_refs": [
+    "ARTIFACT:probe-output-set-fail-0001"
+  ],
   "assumptions": [
-    "probe prompts were selected before evaluation"
+    "detector parameters were fixed before measurement"
   ],
   "limitations": [
-    "watermark detection alone does not prove derivation"
+    "watermark evidence alone does not prove derivation"
   ],
   "artifact_refs": [
-    "ARTIFACT:probe-output-set-0001"
+    "ARTIFACT:probe-output-set-fail-0001"
   ],
-  "collected_at": "2026-09-02T00:00:00Z",
+  "collected_at": "2026-09-03T01:00:00Z",
   "collected_by": "AUDITOR:reference-node",
   "challenge_status": "unchallenged"
 }

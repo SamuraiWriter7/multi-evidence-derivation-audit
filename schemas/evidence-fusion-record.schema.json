@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.2/evidence-fusion-record.schema.json",
+  "title": "Evidence Fusion Record",
+  "description": "A record describing how multiple evidence items and their relationships were combined into an explainable evidentiary result without treating record count as evidence strength.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "fusion_id",
+    "origin_ref",
+    "derivative_ref",
+    "evidence_refs",
+    "relationship_refs",
+    "supporting_evidence_refs",
+    "counter_evidence_refs",
+    "redundant_evidence_refs",
+    "effective_evidence_refs",
+    "evidence_diversity",
+    "fusion_result",
+    "basis",
+    "fusion_policy_ref",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.2.0"
+    },
+    "fusion_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "relationship_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "supporting_evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "counter_evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "redundant_evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "effective_evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Evidence items treated as materially effective after dependency and redundancy analysis."
+    },
+    "evidence_diversity": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "fusion_result": {
+      "type": "string",
+      "enum": [
+        "insufficient",
+        "weak_support",
+        "moderate_support",
+        "strong_support",
+        "conflicted"
+      ]
+    },
+    "confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "basis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "uncertainty_factors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "fusion_policy_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "fusion_result": {
+            "const": "conflicted"
+          }
+        },
+        "required": [
+          "fusion_result"
+        ]
+      },
+      "then": {
+        "properties": {
+          "counter_evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

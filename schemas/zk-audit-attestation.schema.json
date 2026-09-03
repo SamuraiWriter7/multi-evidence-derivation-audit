@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.1/zk-audit-attestation.schema.json",
+  "$id": "https://example.org/meda/v0.2/zk-audit-attestation.schema.json",
   "title": "Zero-Knowledge Audit Attestation",
+  "description": "A cryptographic attestation that a declared audit predicate or computation has been proven without exposing protected inputs. It does not independently establish causal derivation, legal liability, or royalty obligation.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -12,11 +13,13 @@
     "public_inputs",
     "proof_ref",
     "verification_status",
+    "scope_note",
     "created_at"
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1.0"
+      "type": "string",
+      "const": "0.2.0"
     },
     "attestation_id": {
       "type": "string",
@@ -27,7 +30,16 @@
       "minLength": 1
     },
     "predicate_version": {
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "audit_context_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "proof_system": {
       "type": "string",
@@ -40,7 +52,8 @@
     "committed_inputs": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       },
       "uniqueItems": true,
       "default": []
@@ -48,6 +61,18 @@
     "proof_ref": {
       "type": "string",
       "minLength": 1
+    },
+    "verification_method_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verifier_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "verification_status": {
       "type": "string",
@@ -59,7 +84,7 @@
     },
     "scope_note": {
       "type": "string",
-      "default": "This attestation proves only the declared predicate and does not independently establish causal derivation, legal liability, or royalty obligation."
+      "minLength": 1
     },
     "created_at": {
       "type": "string",

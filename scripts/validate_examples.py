@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import sys
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -19,12 +20,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 SCHEMAS_DIR = ROOT / "schemas"
 
-REFERENCE_CASE_DIR = (
+PASS_CASES_DIR = (
     ROOT
     / "examples"
     / "cases"
     / "pass"
-    / "reference-case"
+)
+
+FAIL_CASES_DIR = (
+    ROOT
+    / "examples"
+    / "cases"
+    / "fail"
 )
 
 
@@ -61,61 +68,27 @@ SCHEMA_FILES = {
 
 
 # ============================================================================
-# Reference Case inventory
-#
-# Each file is explicitly mapped to its expected schema.
-# ============================================================================
-
-REFERENCE_CASE_FILES = {
-    Path("audit-case-record.json"):
-        "audit-case-record",
-
-    Path("evidence/evidence-0001.watermark.json"):
-        "audit-evidence-record",
-
-    Path("evidence/evidence-0002.signed-receipt.json"):
-        "audit-evidence-record",
-
-    Path("evidence/evidence-0003.api-trace.json"):
-        "audit-evidence-record",
-
-    Path("evidence/evidence-0004.similarity.json"):
-        "audit-evidence-record",
-
-    Path(
-        "relationships/"
-        "relationship-0001.same-source.json"
-    ):
-        "evidence-relationship-record",
-
-    Path(
-        "relationships/"
-        "relationship-0002.independent-corroboration.json"
-    ):
-        "evidence-relationship-record",
-
-    Path("fusion/fusion-0001.json"):
-        "evidence-fusion-record",
-
-    Path("assessments/assessment-0001.json"):
-        "derivation-assessment-record",
-
-    Path("attestations/zk-attestation-0001.json"):
-        "zk-audit-attestation",
-}
-
-
-# ============================================================================
-# Record identifiers
+# Record identifier fields
 # ============================================================================
 
 ID_FIELDS = {
-    "audit-case-record": "case_id",
-    "audit-evidence-record": "evidence_id",
-    "evidence-relationship-record": "relationship_id",
-    "evidence-fusion-record": "fusion_id",
-    "derivation-assessment-record": "assessment_id",
-    "zk-audit-attestation": "attestation_id",
+    "audit-case-record":
+        "case_id",
+
+    "audit-evidence-record":
+        "evidence_id",
+
+    "evidence-relationship-record":
+        "relationship_id",
+
+    "evidence-fusion-record":
+        "fusion_id",
+
+    "derivation-assessment-record":
+        "assessment_id",
+
+    "zk-audit-attestation":
+        "attestation_id",
 }
 
 
@@ -124,20 +97,139 @@ ID_FIELDS = {
 # ============================================================================
 
 AUDIT_CONTEXT_TYPES = {
-    "case": "audit-case-record",
-    "evidence": "audit-evidence-record",
-    "relationship": "evidence-relationship-record",
-    "fusion": "evidence-fusion-record",
-    "assessment": "derivation-assessment-record",
+    "case":
+        "audit-case-record",
+
+    "evidence":
+        "audit-evidence-record",
+
+    "relationship":
+        "evidence-relationship-record",
+
+    "fusion":
+        "evidence-fusion-record",
+
+    "assessment":
+        "derivation-assessment-record",
 }
 
 
 # ============================================================================
-# Helpers
+# PASS Case inventory
+# ============================================================================
+
+PASS_CASES = {
+    "reference-case": {
+        "expected_files": {
+            "audit-case-record.json",
+
+            "evidence/evidence-0001.watermark.json",
+            "evidence/evidence-0002.signed-receipt.json",
+            "evidence/evidence-0003.api-trace.json",
+            "evidence/evidence-0004.similarity.json",
+
+            "relationships/relationship-0001.same-source.json",
+            "relationships/relationship-0002.independent-corroboration.json",
+
+            "fusion/fusion-0001.json",
+
+            "assessments/assessment-0001.json",
+
+            "attestations/zk-attestation-0001.json",
+        }
+    }
+}
+
+
+# ============================================================================
+# EXPECTED-FAIL Case inventory
+#
+# expected_issue_codes:
+#   Graph Validator must produce exactly these issue codes.
+#
+# All JSON records in these cases must remain Schema-valid.
+# ============================================================================
+
+FAIL_CASES = {
+    "cross-case-evidence": {
+        "expected_files": {
+            "audit-case-record.json",
+            "evidence/evidence-0001.json",
+        },
+        "expected_issue_codes": {
+            "CASE_REF_MISMATCH",
+        },
+    },
+
+    "missing-reference": {
+        "expected_files": {
+            "audit-case-record.json",
+        },
+        "expected_issue_codes": {
+            "CASE_REGISTRY_UNRESOLVED",
+        },
+    },
+
+    "support-counter-overlap": {
+        "expected_files": {
+            "audit-case-record.json",
+            "evidence/evidence-0001.json",
+            "fusion/fusion-0001.json",
+        },
+        "expected_issue_codes": {
+            "SUPPORT_COUNTER_OVERLAP",
+        },
+    },
+
+    "redundant-effective-overlap": {
+        "expected_files": {
+            "audit-case-record.json",
+            "evidence/evidence-0001.json",
+            "fusion/fusion-0001.json",
+        },
+        "expected_issue_codes": {
+            "REDUNDANT_EFFECTIVE_OVERLAP",
+        },
+    },
+
+    "origin-mismatch": {
+        "expected_files": {
+            "audit-case-record.json",
+            "evidence/evidence-0001.json",
+        },
+        "expected_issue_codes": {
+            "ORIGIN_MISMATCH",
+        },
+    },
+
+    "invalid-current-assessment": {
+        "expected_files": {
+            "audit-case-record.json",
+        },
+        "expected_issue_codes": {
+            "CASE_REGISTRY_UNRESOLVED",
+            "CURRENT_ASSESSMENT_UNRESOLVED",
+        },
+    },
+}
+
+
+# ============================================================================
+# Graph issue type
+# ============================================================================
+
+@dataclass(frozen=True)
+class GraphIssue:
+    code: str
+    message: str
+
+
+# ============================================================================
+# Generic helpers
 # ============================================================================
 
 def relative(path: Path) -> str:
-    """Return a repository-relative path for diagnostics."""
+    """Return repository-relative path for diagnostics."""
 
     try:
         return str(path.relative_to(ROOT))
@@ -146,7 +238,7 @@ def relative(path: Path) -> str:
 
 
 def load_json(path: Path) -> Any:
-    """Load JSON and return useful errors on malformed files."""
+    """Load JSON with readable diagnostics."""
 
     try:
         with path.open("r", encoding="utf-8") as file:
@@ -168,7 +260,7 @@ def load_json(path: Path) -> Any:
 def format_instance_path(
     error: ValidationError,
 ) -> str:
-    """Convert jsonschema path into readable notation."""
+    """Convert jsonschema instance path into dot/bracket notation."""
 
     if not error.absolute_path:
         return "<root>"
@@ -189,7 +281,7 @@ def format_instance_path(
 def format_schema_path(
     error: ValidationError,
 ) -> str:
-    """Convert schema path into readable notation."""
+    """Convert jsonschema schema path into readable notation."""
 
     if not error.absolute_schema_path:
         return "<root>"
@@ -203,8 +295,6 @@ def format_schema_path(
 def validation_message(
     error: ValidationError,
 ) -> str:
-    """Create deterministic schema error output."""
-
     return (
         f"path={format_instance_path(error)} | "
         f"validator={error.validator} | "
@@ -215,8 +305,6 @@ def validation_message(
 def error_sort_key(
     error: ValidationError,
 ) -> tuple[str, str, str]:
-    """Sort schema errors deterministically."""
-
     return (
         format_instance_path(error),
         str(error.validator),
@@ -225,10 +313,44 @@ def error_sort_key(
 
 
 # ============================================================================
-# Load and validate schemas
+# Determine schema from case-relative path
+# ============================================================================
+
+def schema_name_for_path(
+    relative_path: Path,
+) -> str:
+
+    path = relative_path.as_posix()
+
+    if path == "audit-case-record.json":
+        return "audit-case-record"
+
+    if path.startswith("evidence/"):
+        return "audit-evidence-record"
+
+    if path.startswith("relationships/"):
+        return "evidence-relationship-record"
+
+    if path.startswith("fusion/"):
+        return "evidence-fusion-record"
+
+    if path.startswith("assessments/"):
+        return "derivation-assessment-record"
+
+    if path.startswith("attestations/"):
+        return "zk-audit-attestation"
+
+    raise RuntimeError(
+        f"Cannot determine schema for case file: {path}"
+    )
+
+
+# ============================================================================
+# Schema loading
 # ============================================================================
 
 def load_validators() -> dict[str, Draft202012Validator]:
+
     validators: dict[str, Draft202012Validator] = {}
 
     print("[schemas]")
@@ -267,6 +389,7 @@ def load_validators() -> dict[str, Draft202012Validator]:
 # ============================================================================
 
 def verify_schema_inventory() -> int:
+
     failures = 0
 
     expected = {
@@ -287,12 +410,14 @@ def verify_schema_inventory() -> int:
 
     for filename in sorted(missing):
         failures += 1
+
         print(
             f"  [FAIL] missing schema: {filename}"
         )
 
     for filename in sorted(extra):
         failures += 1
+
         print(
             f"  [FAIL] unregistered schema: {filename}"
         )
@@ -309,49 +434,86 @@ def verify_schema_inventory() -> int:
 
 
 # ============================================================================
-# Reference Case inventory
+# Case inventory
 # ============================================================================
 
-def verify_reference_case_inventory() -> int:
+def verify_case_inventory(
+    case_dir: Path,
+    expected_files: set[str],
+    case_label: str,
+) -> int:
+
     failures = 0
 
-    expected = {
-        path.as_posix()
-        for path in REFERENCE_CASE_FILES
-    }
-
-    actual = {
-        path.relative_to(
-            REFERENCE_CASE_DIR
-        ).as_posix()
-        for path in REFERENCE_CASE_DIR.rglob("*.json")
+    actual_files = {
+        path.relative_to(case_dir).as_posix()
+        for path in case_dir.rglob("*.json")
         if path.is_file()
     }
 
-    print("[reference case inventory]")
-
-    missing = expected - actual
-    extra = actual - expected
+    missing = expected_files - actual_files
+    extra = actual_files - expected_files
 
     for filename in sorted(missing):
         failures += 1
+
         print(
-            f"  [FAIL] missing reference-case file: "
-            f"{filename}"
+            f"  [FAIL] {case_label}: "
+            f"missing file: {filename}"
         )
 
     for filename in sorted(extra):
         failures += 1
+
         print(
-            f"  [FAIL] unregistered reference-case file: "
-            f"{filename}"
+            f"  [FAIL] {case_label}: "
+            f"unregistered file: {filename}"
         )
 
-    if failures == 0:
-        print(
-            f"  [inventory-ok] "
-            f"{len(expected)} reference-case records registered"
+    return failures
+
+
+def verify_all_case_inventories() -> int:
+
+    failures = 0
+
+    print("[case inventory]")
+
+    for case_name, config in PASS_CASES.items():
+        case_dir = PASS_CASES_DIR / case_name
+
+        case_failures = verify_case_inventory(
+            case_dir=case_dir,
+            expected_files=config["expected_files"],
+            case_label=f"pass/{case_name}",
         )
+
+        failures += case_failures
+
+        if case_failures == 0:
+            print(
+                f"  [inventory-ok] "
+                f"pass/{case_name}: "
+                f"{len(config['expected_files'])} records"
+            )
+
+    for case_name, config in FAIL_CASES.items():
+        case_dir = FAIL_CASES_DIR / case_name
+
+        case_failures = verify_case_inventory(
+            case_dir=case_dir,
+            expected_files=config["expected_files"],
+            case_label=f"fail/{case_name}",
+        )
+
+        failures += case_failures
+
+        if case_failures == 0:
+            print(
+                f"  [inventory-ok] "
+                f"fail/{case_name}: "
+                f"{len(config['expected_files'])} record(s)"
+            )
 
     print()
 
@@ -359,28 +521,34 @@ def verify_reference_case_inventory() -> int:
 
 
 # ============================================================================
-# Load Reference Case records
+# Case loading
 # ============================================================================
 
-def load_reference_case_records(
+def load_case_records(
+    case_dir: Path,
 ) -> dict[Path, tuple[str, dict[str, Any]]]:
 
     records: dict[
         Path,
-        tuple[str, dict[str, Any]]
+        tuple[str, dict[str, Any]],
     ] = {}
 
-    for relative_path, schema_name in (
-        REFERENCE_CASE_FILES.items()
-    ):
-        path = REFERENCE_CASE_DIR / relative_path
+    for path in sorted(case_dir.rglob("*.json")):
+        if not path.is_file():
+            continue
+
+        relative_path = path.relative_to(case_dir)
+
+        schema_name = schema_name_for_path(
+            relative_path
+        )
 
         record = load_json(path)
 
         if not isinstance(record, dict):
             raise RuntimeError(
-                f"Reference-case record must be "
-                f"a JSON object: {relative(path)}"
+                f"Case record must be a JSON object: "
+                f"{relative(path)}"
             )
 
         records[relative_path] = (
@@ -392,80 +560,18 @@ def load_reference_case_records(
 
 
 # ============================================================================
-# Schema validation of Reference Case
+# Version validation
 # ============================================================================
 
-def validate_reference_case_schemas(
-    validators: dict[str, Draft202012Validator],
+def validate_case_versions(
     records: dict[
         Path,
-        tuple[str, dict[str, Any]]
+        tuple[str, dict[str, Any]],
     ],
-) -> int:
+    case_label: str,
+) -> list[str]:
 
-    failures = 0
-
-    print("[reference case schema validation]")
-
-    for relative_path, (
-        schema_name,
-        instance,
-    ) in records.items():
-
-        validator = validators[schema_name]
-
-        errors = sorted(
-            validator.iter_errors(instance),
-            key=error_sort_key,
-        )
-
-        print()
-        print(
-            f"  file: "
-            f"{relative(REFERENCE_CASE_DIR / relative_path)}"
-        )
-        print(
-            f"  schema: {schema_name}"
-        )
-
-        if not errors:
-            print("  [schema-ok]")
-            continue
-
-        failures += 1
-
-        print(
-            "  [FAIL] schema validation failed"
-        )
-
-        for error in errors:
-            print(
-                f"    - {validation_message(error)}"
-            )
-            print(
-                f"      schema_path="
-                f"{format_schema_path(error)}"
-            )
-
-    print()
-
-    return failures
-
-
-# ============================================================================
-# Version preflight
-# ============================================================================
-
-def verify_protocol_versions(
-    records: dict[
-        Path,
-        tuple[str, dict[str, Any]]
-    ],
-) -> int:
-
-    failures = 0
-
-    print("[protocol version preflight]")
+    errors: list[str] = []
 
     for relative_path, (
         _schema_name,
@@ -477,13 +583,11 @@ def verify_protocol_versions(
         )
 
         if schema_version != PROTOCOL_VERSION:
-            failures += 1
-
-            print(
-                f"  [FAIL] "
+            errors.append(
+                f"{case_label}/"
                 f"{relative_path.as_posix()}: "
                 f"schema_version="
-                f"{schema_version!r}, "
+                f"{schema_version!r}; "
                 f"expected "
                 f"{PROTOCOL_VERSION!r}"
             )
@@ -494,27 +598,51 @@ def verify_protocol_versions(
             )
 
             if protocol_version != PROTOCOL_VERSION:
-                failures += 1
-
-                print(
-                    f"  [FAIL] "
+                errors.append(
+                    f"{case_label}/"
                     f"{relative_path.as_posix()}: "
                     f"protocol_version="
-                    f"{protocol_version!r}, "
+                    f"{protocol_version!r}; "
                     f"expected "
                     f"{PROTOCOL_VERSION!r}"
                 )
 
-    if failures == 0:
-        print(
-            "  [version-ok] "
-            "all reference-case records "
-            f"declare MEDA v{PROTOCOL_VERSION}"
+    return errors
+
+
+# ============================================================================
+# Schema validation for a Case
+# ============================================================================
+
+def validate_case_schemas(
+    validators: dict[str, Draft202012Validator],
+    records: dict[
+        Path,
+        tuple[str, dict[str, Any]],
+    ],
+) -> list[str]:
+
+    errors: list[str] = []
+
+    for relative_path, (
+        schema_name,
+        instance,
+    ) in records.items():
+
+        validator = validators[schema_name]
+
+        schema_errors = sorted(
+            validator.iter_errors(instance),
+            key=error_sort_key,
         )
 
-    print()
+        for error in schema_errors:
+            errors.append(
+                f"{relative_path.as_posix()} | "
+                f"{validation_message(error)}"
+            )
 
-    return failures
+    return errors
 
 
 # ============================================================================
@@ -524,7 +652,7 @@ def verify_protocol_versions(
 def build_record_registries(
     records: dict[
         Path,
-        tuple[str, dict[str, Any]]
+        tuple[str, dict[str, Any]],
     ],
 ) -> tuple[
     dict[str, dict[str, dict[str, Any]]],
@@ -533,7 +661,7 @@ def build_record_registries(
 
     registries: dict[
         str,
-        dict[str, dict[str, Any]]
+        dict[str, dict[str, Any]],
     ] = {
         schema_name: {}
         for schema_name in SCHEMA_FILES
@@ -565,35 +693,49 @@ def build_record_registries(
             )
             continue
 
-        registries[schema_name][record_id] = (
-            record
-        )
+        registries[schema_name][record_id] = record
 
     return registries, errors
 
 
 # ============================================================================
-# Generic graph helpers
+# Graph helpers
 # ============================================================================
+
+def add_issue(
+    issues: list[GraphIssue],
+    code: str,
+    message: str,
+) -> None:
+
+    issues.append(
+        GraphIssue(
+            code=code,
+            message=message,
+        )
+    )
+
 
 def check_ref(
     reference: str,
     expected_schema: str,
     registries: dict[
         str,
-        dict[str, dict[str, Any]]
+        dict[str, dict[str, Any]],
     ],
     location: str,
-    errors: list[str],
+    issues: list[GraphIssue],
 ) -> None:
 
-    registry = registries[expected_schema]
-
-    if reference not in registry:
-        errors.append(
-            f"{location}: unresolved reference "
-            f"{reference!r}; "
-            f"expected type={expected_schema}"
+    if reference not in registries[expected_schema]:
+        add_issue(
+            issues,
+            "UNRESOLVED_REFERENCE",
+            (
+                f"{location}: unresolved reference "
+                f"{reference!r}; "
+                f"expected type={expected_schema}"
+            ),
         )
 
 
@@ -602,10 +744,10 @@ def check_ref_list(
     expected_schema: str,
     registries: dict[
         str,
-        dict[str, dict[str, Any]]
+        dict[str, dict[str, Any]],
     ],
     location: str,
-    errors: list[str],
+    issues: list[GraphIssue],
 ) -> None:
 
     for reference in references:
@@ -614,40 +756,46 @@ def check_ref_list(
             expected_schema=expected_schema,
             registries=registries,
             location=location,
-            errors=errors,
+            issues=issues,
         )
 
 
 def check_subset(
     child_values: list[str],
     parent_values: list[str],
+    code: str,
     child_name: str,
     parent_name: str,
     record_id: str,
-    errors: list[str],
+    issues: list[GraphIssue],
 ) -> None:
 
-    child = set(child_values)
-    parent = set(parent_values)
-
-    invalid = child - parent
+    invalid = (
+        set(child_values)
+        - set(parent_values)
+    )
 
     if invalid:
-        errors.append(
-            f"{record_id}: "
-            f"{child_name} contains value(s) "
-            f"not present in {parent_name}: "
-            f"{sorted(invalid)}"
+        add_issue(
+            issues,
+            code,
+            (
+                f"{record_id}: "
+                f"{child_name} contains value(s) "
+                f"not present in {parent_name}: "
+                f"{sorted(invalid)}"
+            ),
         )
 
 
 def check_disjoint(
     left_values: list[str],
     right_values: list[str],
+    code: str,
     left_name: str,
     right_name: str,
     record_id: str,
-    errors: list[str],
+    issues: list[GraphIssue],
 ) -> None:
 
     overlap = (
@@ -656,48 +804,50 @@ def check_disjoint(
     )
 
     if overlap:
-        errors.append(
-            f"{record_id}: "
-            f"{left_name} and {right_name} "
-            f"must be disjoint; "
-            f"overlap={sorted(overlap)}"
+        add_issue(
+            issues,
+            code,
+            (
+                f"{record_id}: "
+                f"{left_name} and "
+                f"{right_name} must be disjoint; "
+                f"overlap={sorted(overlap)}"
+            ),
         )
 
 
 # ============================================================================
-# Graph validation
+# Audit Graph validation
 # ============================================================================
 
 def validate_audit_graph(
     registries: dict[
         str,
-        dict[str, dict[str, Any]]
+        dict[str, dict[str, Any]],
     ],
-) -> int:
+) -> list[GraphIssue]:
 
-    errors: list[str] = []
-
-    print("[audit graph validation]")
-
-    # ------------------------------------------------------------------------
-    # Exactly one Audit Case is expected in the reference graph.
-    # ------------------------------------------------------------------------
+    issues: list[GraphIssue] = []
 
     cases = registries[
         "audit-case-record"
     ]
 
+    # ------------------------------------------------------------------------
+    # Exactly one case per fixture
+    # ------------------------------------------------------------------------
+
     if len(cases) != 1:
-        errors.append(
-            "reference-case must contain exactly "
-            f"one Audit Case; found {len(cases)}"
+        add_issue(
+            issues,
+            "CASE_COUNT_INVALID",
+            (
+                "fixture must contain exactly "
+                f"one Audit Case; found {len(cases)}"
+            ),
         )
 
-        for error in errors:
-            print(f"  [FAIL] {error}")
-
-        print()
-        return len(errors)
+        return issues
 
     case_id, case = next(
         iter(cases.items())
@@ -707,7 +857,7 @@ def validate_audit_graph(
     derivative_ref = case["derivative_ref"]
 
     # ------------------------------------------------------------------------
-    # Case membership / Origin / Derivative consistency
+    # Case / Origin / Derivative consistency
     # ------------------------------------------------------------------------
 
     member_types = [
@@ -719,41 +869,53 @@ def validate_audit_graph(
     ]
 
     for schema_name in member_types:
+
         for record_id, record in (
             registries[schema_name].items()
         ):
 
             if record.get("case_ref") != case_id:
-                errors.append(
-                    f"{record_id}: "
-                    f"case_ref={record.get('case_ref')!r} "
-                    f"does not match {case_id!r}"
+                add_issue(
+                    issues,
+                    "CASE_REF_MISMATCH",
+                    (
+                        f"{record_id}: "
+                        f"case_ref="
+                        f"{record.get('case_ref')!r} "
+                        f"does not match "
+                        f"{case_id!r}"
+                    ),
                 )
 
             if record.get("origin_ref") != origin_ref:
-                errors.append(
-                    f"{record_id}: "
-                    "origin_ref does not match "
-                    f"Audit Case origin_ref "
-                    f"{origin_ref!r}"
+                add_issue(
+                    issues,
+                    "ORIGIN_MISMATCH",
+                    (
+                        f"{record_id}: "
+                        "origin_ref does not match "
+                        f"Audit Case origin_ref "
+                        f"{origin_ref!r}"
+                    ),
                 )
 
             if (
                 record.get("derivative_ref")
                 != derivative_ref
             ):
-                errors.append(
-                    f"{record_id}: "
-                    "derivative_ref does not match "
-                    f"Audit Case derivative_ref "
-                    f"{derivative_ref!r}"
+                add_issue(
+                    issues,
+                    "DERIVATIVE_MISMATCH",
+                    (
+                        f"{record_id}: "
+                        "derivative_ref does not match "
+                        f"Audit Case derivative_ref "
+                        f"{derivative_ref!r}"
+                    ),
                 )
 
     # ------------------------------------------------------------------------
     # Case registry integrity
-    #
-    # The Reference Case is intended to be complete, so its registered refs
-    # must exactly match the actual graph nodes.
     # ------------------------------------------------------------------------
 
     case_registry_fields = {
@@ -776,6 +938,7 @@ def validate_audit_graph(
     for field_name, schema_name in (
         case_registry_fields.items()
     ):
+
         declared = set(
             case.get(field_name, [])
         )
@@ -784,32 +947,40 @@ def validate_audit_graph(
             registries[schema_name].keys()
         )
 
-        missing_from_case = (
+        unregistered_actual = (
             actual - declared
         )
 
-        unresolved_in_case = (
+        unresolved_declared = (
             declared - actual
         )
 
-        if missing_from_case:
-            errors.append(
-                f"{case_id}: "
-                f"{field_name} does not register "
-                f"existing record(s): "
-                f"{sorted(missing_from_case)}"
+        if unregistered_actual:
+            add_issue(
+                issues,
+                "CASE_REGISTRY_INCOMPLETE",
+                (
+                    f"{case_id}: "
+                    f"{field_name} does not register "
+                    f"existing record(s): "
+                    f"{sorted(unregistered_actual)}"
+                ),
             )
 
-        if unresolved_in_case:
-            errors.append(
-                f"{case_id}: "
-                f"{field_name} contains unresolved "
-                f"record(s): "
-                f"{sorted(unresolved_in_case)}"
+        if unresolved_declared:
+            add_issue(
+                issues,
+                "CASE_REGISTRY_UNRESOLVED",
+                (
+                    f"{case_id}: "
+                    f"{field_name} contains unresolved "
+                    f"record(s): "
+                    f"{sorted(unresolved_declared)}"
+                ),
             )
 
     # ------------------------------------------------------------------------
-    # Current assessment integrity
+    # Current assessment
     # ------------------------------------------------------------------------
 
     current_assessment_ref = (
@@ -818,17 +989,24 @@ def validate_audit_graph(
 
     if current_assessment_ref is not None:
 
-        check_ref(
-            reference=current_assessment_ref,
-            expected_schema=(
-                "derivation-assessment-record"
-            ),
-            registries=registries,
-            location=(
-                f"{case_id}.current_assessment_ref"
-            ),
-            errors=errors,
-        )
+        assessment_registry = registries[
+            "derivation-assessment-record"
+        ]
+
+        if (
+            current_assessment_ref
+            not in assessment_registry
+        ):
+            add_issue(
+                issues,
+                "CURRENT_ASSESSMENT_UNRESOLVED",
+                (
+                    f"{case_id}: "
+                    "current_assessment_ref "
+                    f"{current_assessment_ref!r} "
+                    "does not resolve"
+                ),
+            )
 
         if (
             current_assessment_ref
@@ -837,16 +1015,20 @@ def validate_audit_graph(
                 [],
             )
         ):
-            errors.append(
-                f"{case_id}: "
-                "current_assessment_ref "
-                f"{current_assessment_ref!r} "
-                "is not registered in "
-                "assessment_refs"
+            add_issue(
+                issues,
+                "CURRENT_ASSESSMENT_UNREGISTERED",
+                (
+                    f"{case_id}: "
+                    "current_assessment_ref "
+                    f"{current_assessment_ref!r} "
+                    "is not registered in "
+                    "assessment_refs"
+                ),
             )
 
     # ------------------------------------------------------------------------
-    # Evidence Relationship integrity
+    # Evidence relationships
     # ------------------------------------------------------------------------
 
     relationships = registries[
@@ -864,14 +1046,12 @@ def validate_audit_graph(
 
         check_ref_list(
             references=evidence_refs,
-            expected_schema=(
-                "audit-evidence-record"
-            ),
+            expected_schema="audit-evidence-record",
             registries=registries,
             location=(
                 f"{relationship_id}.evidence_refs"
             ),
-            errors=errors,
+            issues=issues,
         )
 
         check_subset(
@@ -880,14 +1060,15 @@ def validate_audit_graph(
                 "evidence_refs",
                 [],
             ),
+            code="RELATIONSHIP_EVIDENCE_OUTSIDE_CASE",
             child_name="evidence_refs",
             parent_name="case.evidence_refs",
             record_id=relationship_id,
-            errors=errors,
+            issues=issues,
         )
 
     # ------------------------------------------------------------------------
-    # Evidence Fusion integrity
+    # Evidence Fusion
     # ------------------------------------------------------------------------
 
     fusions = registries[
@@ -910,26 +1091,18 @@ def validate_audit_graph(
 
         check_ref_list(
             references=fusion_evidence_refs,
-            expected_schema=(
-                "audit-evidence-record"
-            ),
+            expected_schema="audit-evidence-record",
             registries=registries,
-            location=(
-                f"{fusion_id}.evidence_refs"
-            ),
-            errors=errors,
+            location=f"{fusion_id}.evidence_refs",
+            issues=issues,
         )
 
         check_ref_list(
             references=relationship_refs,
-            expected_schema=(
-                "evidence-relationship-record"
-            ),
+            expected_schema="evidence-relationship-record",
             registries=registries,
-            location=(
-                f"{fusion_id}.relationship_refs"
-            ),
-            errors=errors,
+            location=f"{fusion_id}.relationship_refs",
+            issues=issues,
         )
 
         check_subset(
@@ -938,10 +1111,11 @@ def validate_audit_graph(
                 "evidence_refs",
                 [],
             ),
+            code="FUSION_EVIDENCE_OUTSIDE_CASE",
             child_name="evidence_refs",
             parent_name="case.evidence_refs",
             record_id=fusion_id,
-            errors=errors,
+            issues=issues,
         )
 
         check_subset(
@@ -950,10 +1124,11 @@ def validate_audit_graph(
                 "relationship_refs",
                 [],
             ),
+            code="FUSION_RELATIONSHIP_OUTSIDE_CASE",
             child_name="relationship_refs",
             parent_name="case.relationship_refs",
             record_id=fusion_id,
-            errors=errors,
+            issues=issues,
         )
 
         evidence_subsets = [
@@ -970,31 +1145,13 @@ def validate_audit_graph(
                     [],
                 ),
                 parent_values=fusion_evidence_refs,
+                code="FUSION_SUBSET_INVALID",
                 child_name=subset_name,
                 parent_name="evidence_refs",
                 record_id=fusion_id,
-                errors=errors,
+                issues=issues,
             )
 
-        # A redundant record cannot simultaneously
-        # be treated as an effective independent channel.
-        check_disjoint(
-            left_values=fusion.get(
-                "redundant_evidence_refs",
-                [],
-            ),
-            right_values=fusion.get(
-                "effective_evidence_refs",
-                [],
-            ),
-            left_name="redundant_evidence_refs",
-            right_name="effective_evidence_refs",
-            record_id=fusion_id,
-            errors=errors,
-        )
-
-        # The same evidence cannot simultaneously
-        # support and counter the same fusion result.
         check_disjoint(
             left_values=fusion.get(
                 "supporting_evidence_refs",
@@ -1004,14 +1161,32 @@ def validate_audit_graph(
                 "counter_evidence_refs",
                 [],
             ),
+            code="SUPPORT_COUNTER_OVERLAP",
             left_name="supporting_evidence_refs",
             right_name="counter_evidence_refs",
             record_id=fusion_id,
-            errors=errors,
+            issues=issues,
         )
 
-        # Every referenced relationship must operate
-        # entirely inside this Fusion evidence set.
+        check_disjoint(
+            left_values=fusion.get(
+                "redundant_evidence_refs",
+                [],
+            ),
+            right_values=fusion.get(
+                "effective_evidence_refs",
+                [],
+            ),
+            code="REDUNDANT_EFFECTIVE_OVERLAP",
+            left_name="redundant_evidence_refs",
+            right_name="effective_evidence_refs",
+            record_id=fusion_id,
+            issues=issues,
+        )
+
+        # Every Relationship used by a Fusion
+        # must only reference Evidence that is
+        # inside that Fusion.
         for relationship_ref in relationship_refs:
 
             relationship = relationships.get(
@@ -1027,19 +1202,21 @@ def validate_audit_graph(
                     [],
                 ),
                 parent_values=fusion_evidence_refs,
+                code=(
+                    "RELATIONSHIP_OUTSIDE_FUSION"
+                ),
                 child_name=(
-                    f"{relationship_ref}."
-                    "evidence_refs"
+                    f"{relationship_ref}.evidence_refs"
                 ),
                 parent_name=(
                     f"{fusion_id}.evidence_refs"
                 ),
                 record_id=fusion_id,
-                errors=errors,
+                issues=issues,
             )
 
     # ------------------------------------------------------------------------
-    # Derivation Assessment integrity
+    # Derivation Assessment
     # ------------------------------------------------------------------------
 
     assessments = registries[
@@ -1066,26 +1243,22 @@ def validate_audit_graph(
 
         check_ref_list(
             references=assessment_evidence_refs,
-            expected_schema=(
-                "audit-evidence-record"
-            ),
+            expected_schema="audit-evidence-record",
             registries=registries,
             location=(
                 f"{assessment_id}.evidence_refs"
             ),
-            errors=errors,
+            issues=issues,
         )
 
         check_ref_list(
             references=assessment_fusion_refs,
-            expected_schema=(
-                "evidence-fusion-record"
-            ),
+            expected_schema="evidence-fusion-record",
             registries=registries,
             location=(
                 f"{assessment_id}.fusion_refs"
             ),
-            errors=errors,
+            issues=issues,
         )
 
         check_subset(
@@ -1094,10 +1267,11 @@ def validate_audit_graph(
                 "evidence_refs",
                 [],
             ),
+            code="ASSESSMENT_EVIDENCE_OUTSIDE_CASE",
             child_name="evidence_refs",
             parent_name="case.evidence_refs",
             record_id=assessment_id,
-            errors=errors,
+            issues=issues,
         )
 
         check_subset(
@@ -1106,10 +1280,11 @@ def validate_audit_graph(
                 "fusion_refs",
                 [],
             ),
+            code="ASSESSMENT_FUSION_OUTSIDE_CASE",
             child_name="fusion_refs",
             parent_name="case.fusion_refs",
             record_id=assessment_id,
-            errors=errors,
+            issues=issues,
         )
 
         check_subset(
@@ -1118,20 +1293,22 @@ def validate_audit_graph(
                 [],
             ),
             parent_values=assessment_evidence_refs,
+            code="ASSESSMENT_CONFLICT_SUBSET_INVALID",
             child_name=(
                 "conflicting_evidence_refs"
             ),
             parent_name="evidence_refs",
             record_id=assessment_id,
-            errors=errors,
+            issues=issues,
         )
 
-        # Assessment evidence must come from at least
-        # one of the Fusion records it references.
         fused_evidence: set[str] = set()
 
         for fusion_ref in assessment_fusion_refs:
-            fusion = fusions.get(fusion_ref)
+
+            fusion = fusions.get(
+                fusion_ref
+            )
 
             if fusion is not None:
                 fused_evidence.update(
@@ -1147,15 +1324,20 @@ def validate_audit_graph(
         )
 
         if assessment_only:
-            errors.append(
-                f"{assessment_id}: "
-                "assessment contains evidence "
-                "not present in any referenced "
-                f"Fusion: {sorted(assessment_only)}"
+            add_issue(
+                issues,
+                "ASSESSMENT_EVIDENCE_NOT_FUSED",
+                (
+                    f"{assessment_id}: "
+                    "assessment contains evidence "
+                    "not present in any referenced "
+                    f"Fusion: "
+                    f"{sorted(assessment_only)}"
+                ),
             )
 
     # ------------------------------------------------------------------------
-    # ZK Audit Attestation integrity
+    # ZK Audit Attestation
     # ------------------------------------------------------------------------
 
     attestations = registries[
@@ -1197,22 +1379,23 @@ def validate_audit_graph(
                     f"{attestation_id}."
                     "audit_context_ref"
                 ),
-                errors=errors,
+                issues=issues,
             )
 
-        # "other" is intentionally allowed to point
-        # outside the MEDA protocol graph.
         elif context_type != "other":
-            errors.append(
-                f"{attestation_id}: "
-                "unsupported audit_context_type "
-                f"{context_type!r}"
+            add_issue(
+                issues,
+                "ATTESTATION_CONTEXT_TYPE_INVALID",
+                (
+                    f"{attestation_id}: "
+                    "unsupported "
+                    "audit_context_type "
+                    f"{context_type!r}"
+                ),
             )
 
-        # committed_inputs may contain either protocol
-        # record IDs or opaque external commitments.
-        #
-        # Known MEDA-style IDs must resolve.
+        # MEDA-looking committed references
+        # must resolve inside this fixture.
         for committed_ref in attestation.get(
             "committed_inputs",
             [],
@@ -1230,19 +1413,18 @@ def validate_audit_graph(
             if committed_ref.startswith(
                 meda_prefixes
             ):
-                if (
-                    committed_ref
-                    not in all_protocol_ids
-                ):
-                    errors.append(
-                        f"{attestation_id}: "
-                        "unresolved protocol "
-                        "committed_input "
-                        f"{committed_ref!r}"
+                if committed_ref not in all_protocol_ids:
+                    add_issue(
+                        issues,
+                        "ATTESTATION_COMMITMENT_UNRESOLVED",
+                        (
+                            f"{attestation_id}: "
+                            "unresolved protocol "
+                            "committed_input "
+                            f"{committed_ref!r}"
+                        ),
                     )
 
-        # If standard public context keys are exposed,
-        # they must agree with the enclosing Audit Case.
         public_inputs = attestation.get(
             "public_inputs",
             {},
@@ -1253,10 +1435,14 @@ def validate_audit_graph(
             and public_inputs["case_ref"]
             != case_id
         ):
-            errors.append(
-                f"{attestation_id}: "
-                "public_inputs.case_ref "
-                "does not match Audit Case"
+            add_issue(
+                issues,
+                "ATTESTATION_PUBLIC_CASE_MISMATCH",
+                (
+                    f"{attestation_id}: "
+                    "public_inputs.case_ref "
+                    "does not match Audit Case"
+                ),
             )
 
         if (
@@ -1264,10 +1450,14 @@ def validate_audit_graph(
             and public_inputs["origin_ref"]
             != origin_ref
         ):
-            errors.append(
-                f"{attestation_id}: "
-                "public_inputs.origin_ref "
-                "does not match Audit Case"
+            add_issue(
+                issues,
+                "ATTESTATION_PUBLIC_ORIGIN_MISMATCH",
+                (
+                    f"{attestation_id}: "
+                    "public_inputs.origin_ref "
+                    "does not match Audit Case"
+                ),
             )
 
         if (
@@ -1275,10 +1465,14 @@ def validate_audit_graph(
             and public_inputs["derivative_ref"]
             != derivative_ref
         ):
-            errors.append(
-                f"{attestation_id}: "
-                "public_inputs.derivative_ref "
-                "does not match Audit Case"
+            add_issue(
+                issues,
+                "ATTESTATION_PUBLIC_DERIVATIVE_MISMATCH",
+                (
+                    f"{attestation_id}: "
+                    "public_inputs.derivative_ref "
+                    "does not match Audit Case"
+                ),
             )
 
         if (
@@ -1287,45 +1481,311 @@ def validate_audit_graph(
             and public_inputs["fusion_ref"]
             != context_ref
         ):
-            errors.append(
-                f"{attestation_id}: "
-                "public_inputs.fusion_ref "
-                "does not match "
-                "audit_context_ref"
+            add_issue(
+                issues,
+                "ATTESTATION_PUBLIC_CONTEXT_MISMATCH",
+                (
+                    f"{attestation_id}: "
+                    "public_inputs.fusion_ref "
+                    "does not match "
+                    "audit_context_ref"
+                ),
             )
 
-    # ------------------------------------------------------------------------
-    # Result
-    # ------------------------------------------------------------------------
+    return issues
 
-    if errors:
-        for error in errors:
-            print(
-                f"  [graph-fail] {error}"
-            )
+
+# ============================================================================
+# PASS Graph validation
+# ============================================================================
+
+def validate_pass_cases(
+    validators: dict[str, Draft202012Validator],
+) -> int:
+
+    failures = 0
+
+    print("[pass graph cases]")
+
+    for case_name in PASS_CASES:
+
+        case_dir = (
+            PASS_CASES_DIR
+            / case_name
+        )
 
         print()
-        return len(errors)
+        print(
+            f"  case: {case_name}"
+        )
 
-    print(
-        "  [graph-ok] "
-        "all references resolve and "
-        "cross-record invariants hold"
-    )
+        records = load_case_records(
+            case_dir
+        )
 
-    print(
-        "  [case-ok] "
-        f"{case_id}: "
-        f"{len(registries['audit-evidence-record'])} evidence, "
-        f"{len(registries['evidence-relationship-record'])} relationships, "
-        f"{len(registries['evidence-fusion-record'])} fusion, "
-        f"{len(registries['derivation-assessment-record'])} assessment, "
-        f"{len(registries['zk-audit-attestation'])} attestation"
-    )
+        version_errors = validate_case_versions(
+            records=records,
+            case_label=f"pass/{case_name}",
+        )
+
+        schema_errors = validate_case_schemas(
+            validators=validators,
+            records=records,
+        )
+
+        if version_errors:
+            failures += len(version_errors)
+
+            for error in version_errors:
+                print(
+                    f"    [FAIL] version: {error}"
+                )
+
+        if schema_errors:
+            failures += len(schema_errors)
+
+            for error in schema_errors:
+                print(
+                    f"    [FAIL] schema: {error}"
+                )
+
+        if version_errors or schema_errors:
+            continue
+
+        registries, registry_errors = (
+            build_record_registries(
+                records
+            )
+        )
+
+        if registry_errors:
+            failures += len(registry_errors)
+
+            for error in registry_errors:
+                print(
+                    f"    [FAIL] registry: {error}"
+                )
+
+            continue
+
+        issues = validate_audit_graph(
+            registries
+        )
+
+        if issues:
+            failures += len(issues)
+
+            for issue in issues:
+                print(
+                    f"    [graph-fail] "
+                    f"{issue.code}: "
+                    f"{issue.message}"
+                )
+
+            continue
+
+        total_records = sum(
+            len(registry)
+            for registry
+            in registries.values()
+        )
+
+        print(
+            f"    [schema-ok] "
+            f"{total_records} records"
+        )
+
+        print(
+            "    [graph-ok] "
+            "all references resolve and "
+            "cross-record invariants hold"
+        )
 
     print()
 
-    return 0
+    return failures
+
+
+# ============================================================================
+# EXPECTED-FAIL Graph validation
+# ============================================================================
+
+def validate_expected_fail_cases(
+    validators: dict[str, Draft202012Validator],
+) -> int:
+
+    failures = 0
+
+    print("[expected-fail graph cases]")
+
+    for case_name, config in FAIL_CASES.items():
+
+        case_dir = (
+            FAIL_CASES_DIR
+            / case_name
+        )
+
+        expected_codes = set(
+            config["expected_issue_codes"]
+        )
+
+        print()
+        print(
+            f"  case: {case_name}"
+        )
+
+        print(
+            "    expected issue code(s): "
+            + ", ".join(
+                sorted(expected_codes)
+            )
+        )
+
+        records = load_case_records(
+            case_dir
+        )
+
+        version_errors = validate_case_versions(
+            records=records,
+            case_label=f"fail/{case_name}",
+        )
+
+        schema_errors = validate_case_schemas(
+            validators=validators,
+            records=records,
+        )
+
+        # FAIL Graph fixtures must still be valid
+        # individual MEDA records.
+        if version_errors:
+            failures += len(version_errors)
+
+            for error in version_errors:
+                print(
+                    f"    [FAIL] version: {error}"
+                )
+
+            continue
+
+        if schema_errors:
+            failures += len(schema_errors)
+
+            print(
+                "    [FAIL] expected "
+                "Schema-valid fixture"
+            )
+
+            for error in schema_errors:
+                print(
+                    f"      - {error}"
+                )
+
+            continue
+
+        registries, registry_errors = (
+            build_record_registries(
+                records
+            )
+        )
+
+        if registry_errors:
+            failures += len(registry_errors)
+
+            print(
+                "    [FAIL] registry construction "
+                "failed before Graph validation"
+            )
+
+            for error in registry_errors:
+                print(
+                    f"      - {error}"
+                )
+
+            continue
+
+        issues = validate_audit_graph(
+            registries
+        )
+
+        if not issues:
+            failures += 1
+
+            print(
+                "    [FAIL] graph unexpectedly passed"
+            )
+
+            continue
+
+        actual_codes = {
+            issue.code
+            for issue in issues
+        }
+
+        missing_expected = (
+            expected_codes
+            - actual_codes
+        )
+
+        unexpected = (
+            actual_codes
+            - expected_codes
+        )
+
+        if missing_expected:
+            failures += len(
+                missing_expected
+            )
+
+            print(
+                "    [FAIL] expected Graph issue "
+                "was not produced:"
+            )
+
+            for code in sorted(
+                missing_expected
+            ):
+                print(
+                    f"      - {code}"
+                )
+
+        if unexpected:
+            failures += len(
+                unexpected
+            )
+
+            print(
+                "    [FAIL] unexpected Graph "
+                "issue code(s) detected:"
+            )
+
+            for code in sorted(
+                unexpected
+            ):
+                print(
+                    f"      - {code}"
+                )
+
+        if (
+            not missing_expected
+            and not unexpected
+        ):
+            print(
+                "    [schema-ok]"
+            )
+
+            print(
+                "    [expected-graph-fail]"
+            )
+
+            for issue in issues:
+                print(
+                    f"      - {issue.code}: "
+                    f"{issue.message}"
+                )
+
+    print()
+
+    return failures
 
 
 # ============================================================================
@@ -1347,59 +1807,17 @@ def main() -> int:
 
         failures += verify_schema_inventory()
 
-        failures += (
-            verify_reference_case_inventory()
-        )
+        failures += verify_all_case_inventories()
 
-        records = (
-            load_reference_case_records()
-        )
-
-        failures += verify_protocol_versions(
-            records
+        failures += validate_pass_cases(
+            validators
         )
 
         failures += (
-            validate_reference_case_schemas(
-                validators=validators,
-                records=records,
+            validate_expected_fail_cases(
+                validators
             )
         )
-
-        registries, registry_errors = (
-            build_record_registries(
-                records
-            )
-        )
-
-        print("[record registry]")
-
-        if registry_errors:
-            failures += len(registry_errors)
-
-            for error in registry_errors:
-                print(
-                    f"  [FAIL] {error}"
-                )
-        else:
-            total_records = sum(
-                len(registry)
-                for registry
-                in registries.values()
-            )
-
-            print(
-                f"  [registry-ok] "
-                f"{total_records} protocol "
-                "records indexed"
-            )
-
-        print()
-
-        if not registry_errors:
-            failures += validate_audit_graph(
-                registries
-            )
 
     except RuntimeError as exc:
         print(
@@ -1413,17 +1831,20 @@ def main() -> int:
 
     if failures == 0:
         print("[validate-pass]")
+
         print(
-            "All 6 schemas are valid, "
-            "all 10 Reference Case records "
-            "passed schema validation, "
-            "and the complete MEDA v0.3 "
-            "Audit Case Graph passed "
-            "cross-record integrity validation."
+            "All 6 schemas are valid. "
+            "The Reference Case passed complete "
+            "Audit Graph validation, and all 6 "
+            "expected-fail Graph cases were rejected "
+            "for their intended cross-record "
+            "integrity violations."
         )
+
         return 0
 
     print("[validate-fail]")
+
     print(
         f"{failures} validation "
         "problem(s) detected."

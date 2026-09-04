@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.3.0",
+  "case_ref": "CASE-0001",
+  "evidence_id": "EVIDENCE-0004",
+  "evidence_type": "similarity",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "controlled behavioral similarity evaluation",
+  "maturity": "experimental",
+  "observation": {
+    "evaluation_completed": true,
+    "probe_set": "behavioral-probe-set-v1",
+    "probe_count": 200,
+    "similarity_metric": "reference-behavioral-similarity-v1",
+    "observed_similarity": 0.81
+  },
+  "statistic": 0.81,
+  "threshold": 0.75,
+  "calibration_ref": "CALIBRATION:behavioral-similarity-v1",
+  "source_event_ref": "EVENT:similarity-evaluation-0001",
+  "source_artifact_refs": [
+    "ARTIFACT:similarity-output-set-0001"
+  ],
+  "assumptions": [
+    "the probe set was fixed before evaluation",
+    "the compared models were evaluated under equivalent sampling conditions",
+    "the similarity metric was selected before observing the final score"
+  ],
+  "limitations": [
+    "behavioral similarity may arise without direct derivation",
+    "similarity evidence does not independently establish training lineage",
+    "model family and benchmark design may affect the observed similarity"
+  ],
+  "artifact_refs": [
+    "ARTIFACT:behavioral-probe-set-v1",
+    "ARTIFACT:similarity-output-set-0001",
+    "ARTIFACT:similarity-config-0001"
+  ],
+  "collected_at": "2026-09-04T00:18:00Z",
+  "collected_by": "AUDITOR:reference-node",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "challenge_status": "unchallenged"
+}

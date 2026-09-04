@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.3.0",
+  "case_ref": "CASE-0001",
+  "fusion_id": "FUSION-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "relationship_refs": [
+    "REL-0001",
+    "REL-0002"
+  ],
+  "supporting_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "counter_evidence_refs": [],
+  "redundant_evidence_refs": [
+    "EVIDENCE-0003"
+  ],
+  "effective_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0004"
+  ],
+  "evidence_diversity": 3,
+  "fusion_result": "strong_support",
+  "confidence": 0.86,
+  "basis": [
+    "all four evidence records support the derivation hypothesis at the observation level",
+    "EVIDENCE-0002 and EVIDENCE-0003 originate from the same underlying API event",
+    "EVIDENCE-0003 was therefore discounted as redundant for independent evidence counting",
+    "three materially effective evidence channels remain after dependency analysis",
+    "watermark, authenticated access evidence, and behavioral similarity provide different forms of support",
+    "no material counter-evidence was registered in this fusion run"
+  ],
+  "uncertainty_factors": [
+    "complete training data was not available for direct inspection",
+    "watermark evidence may be affected by transformation or spoofing",
+    "behavioral similarity does not uniquely identify causal model lineage"
+  ],
+  "limitations": [
+    "strong support is a protocol-level evidentiary result rather than a legal verdict",
+    "fusion confidence does not represent the probability of copyright infringement",
+    "the fusion result does not independently create royalty or settlement obligations"
+  ],
+  "fusion_policy_ref": "FUSION-POLICY:MEDA-v0.3-reference",
+  "created_at": "2026-09-04T00:32:00Z"
+}

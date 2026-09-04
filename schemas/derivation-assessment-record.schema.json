@@ -1,12 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.2/derivation-assessment-record.schema.json",
+  "$id": "https://example.org/meda/v0.3/derivation-assessment-record.schema.json",
   "title": "Derivation Assessment Record",
-  "description": "A protocol-level assessment of evidentiary support for a possible derivation relationship. The assessment does not itself establish legal infringement, liability, or royalty obligation.",
+  "description": "A protocol-level assessment of evidentiary support for a possible derivation relationship within an audit case. The assessment does not itself establish legal infringement, liability, or royalty obligation.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema_version",
+    "case_ref",
     "assessment_id",
     "origin_ref",
     "derivative_ref",
@@ -20,7 +21,11 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.2.0"
+      "const": "0.3.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1
     },
     "assessment_id": {
       "type": "string",
@@ -114,7 +119,7 @@
     },
     "protocol_version": {
       "type": "string",
-      "const": "0.2.0"
+      "const": "0.3.0"
     },
     "created_at": {
       "type": "string",

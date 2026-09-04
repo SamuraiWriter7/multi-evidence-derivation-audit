@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.3.0",
+  "case_ref": "CASE-0001",
+  "evidence_id": "EVIDENCE-0001",
+  "evidence_type": "watermark",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "green-list statistical watermark detector",
+  "maturity": "emerging",
+  "observation": {
+    "signal_detected": true,
+    "sample_count": 120,
+    "sampling_policy": "controlled_probe_set_v1",
+    "detector_version": "1.0.0"
+  },
+  "statistic": 5.27,
+  "threshold": 4.0,
+  "calibration_ref": "CALIBRATION:watermark-detector-v1",
+  "source_event_ref": "EVENT:probe-session-0001",
+  "source_artifact_refs": [
+    "ARTIFACT:probe-output-set-0001"
+  ],
+  "assumptions": [
+    "probe prompts were selected before evaluation",
+    "detector parameters were fixed before measurement",
+    "sampling conditions were held constant during the audit"
+  ],
+  "limitations": [
+    "watermark detection alone does not prove derivation",
+    "signal strength may be affected by paraphrasing or model transformation",
+    "watermark signals may be vulnerable to spoofing or transplantation"
+  ],
+  "artifact_refs": [
+    "ARTIFACT:probe-set-0001",
+    "ARTIFACT:probe-output-set-0001",
+    "ARTIFACT:detector-config-0001"
+  ],
+  "collected_at": "2026-09-04T00:05:00Z",
+  "collected_by": "AUDITOR:reference-node",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "challenge_status": "unchallenged"
+}

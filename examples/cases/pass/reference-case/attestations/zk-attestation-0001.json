@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.3.0",
+  "case_ref": "CASE-0001",
+  "attestation_id": "ZK-ATTESTATION-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "predicate": "The committed evidence set was evaluated under the declared fusion predicate and produced the public fusion result without exposing protected committed inputs.",
+  "predicate_version": "fusion-audit-predicate-v1",
+  "audit_context_type": "fusion",
+  "audit_context_ref": "FUSION-0001",
+  "proof_system": "reference-zk-proof-system",
+  "public_inputs": {
+    "case_ref": "CASE-0001",
+    "origin_ref": "MODEL:origin-alpha:v1",
+    "derivative_ref": "MODEL:student-beta:v1",
+    "fusion_ref": "FUSION-0001",
+    "fusion_policy_ref": "FUSION-POLICY:MEDA-v0.3-reference",
+    "fusion_result": "strong_support",
+    "protocol_version": "0.3.0"
+  },
+  "committed_inputs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004",
+    "REL-0001",
+    "REL-0002"
+  ],
+  "proof_ref": "PROOF:zk-audit-fusion-0001",
+  "verification_method_ref": "VERIFIER-METHOD:reference-v1",
+  "verifier_ref": "VERIFIER:reference-node",
+  "verification_status": "verified",
+  "scope_note": "This attestation proves only the declared fusion audit predicate. It does not independently establish causal derivation, copyright infringement, legal liability, royalty obligation, or settlement entitlement.",
+  "created_at": "2026-09-04T00:45:00Z"
+}

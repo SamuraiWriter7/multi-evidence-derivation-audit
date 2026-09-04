@@ -1,14 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.2/zk-audit-attestation.schema.json",
+  "$id": "https://example.org/meda/v0.3/zk-audit-attestation.schema.json",
   "title": "Zero-Knowledge Audit Attestation",
-  "description": "A cryptographic attestation that a declared audit predicate or computation has been proven without exposing protected inputs. It does not independently establish causal derivation, legal liability, or royalty obligation.",
+  "description": "A cryptographic attestation that a declared audit predicate or computation has been proven without exposing protected inputs. The attestation belongs to a declared audit case and does not independently establish causal derivation, legal liability, or royalty obligation.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema_version",
+    "case_ref",
     "attestation_id",
+    "origin_ref",
+    "derivative_ref",
     "predicate",
+    "audit_context_type",
+    "audit_context_ref",
     "proof_system",
     "public_inputs",
     "proof_ref",
@@ -19,9 +24,21 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.2.0"
+      "const": "0.3.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1
     },
     "attestation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
       "type": "string",
       "minLength": 1
     },
@@ -35,11 +52,20 @@
         "null"
       ]
     },
-    "audit_context_ref": {
-      "type": [
-        "string",
-        "null"
+    "audit_context_type": {
+      "type": "string",
+      "enum": [
+        "evidence",
+        "relationship",
+        "fusion",
+        "assessment",
+        "case",
+        "other"
       ]
+    },
+    "audit_context_ref": {
+      "type": "string",
+      "minLength": 1
     },
     "proof_system": {
       "type": "string",

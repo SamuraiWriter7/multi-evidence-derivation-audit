@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.3.0",
+  "case_ref": "CASE-FAIL-ORIGIN-001",
+  "evidence_id": "EVIDENCE-FAIL-ORIGIN-001",
+  "evidence_type": "watermark",
+  "origin_ref": "MODEL:origin-gamma:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "statistical watermark detector",
+  "maturity": "emerging",
+  "observation": {
+    "signal_detected": true
+  },
+  "statistic": 4.8,
+  "threshold": 4.0,
+  "calibration_ref": "CALIBRATION:watermark-v1",
+  "source_event_ref": "EVENT:fail-origin-001",
+  "source_artifact_refs": [],
+  "assumptions": [],
+  "limitations": [
+    "fixture intentionally uses a mismatched origin"
+  ],
+  "artifact_refs": [],
+  "collected_at": "2026-09-04T01:41:00Z",
+  "collected_by": "AUDITOR:reference-node",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "challenge_status": "unchallenged"
+}

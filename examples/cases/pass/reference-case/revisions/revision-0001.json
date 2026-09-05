@@ -1,0 +1,46 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-0001",
+  "revision_id": "REVISION-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "prior_assessment_ref": "ASSESSMENT-0001",
+  "revised_assessment_ref": "ASSESSMENT-0002",
+  "revision_trigger": "reproduction",
+  "trigger_refs": [
+    "REPRODUCTION-0001"
+  ],
+  "challenge_refs": [
+    "CHALLENGE-0001"
+  ],
+  "reproduction_refs": [
+    "REPRODUCTION-0001"
+  ],
+  "evidence_added_refs": [
+    "EVIDENCE-0005"
+  ],
+  "evidence_removed_refs": [],
+  "fusion_refs": [
+    "FUSION-0002"
+  ],
+  "revision_basis": [
+    "CHALLENGE-0001 questioned the stability of the confidence assigned in ASSESSMENT-0001",
+    "REPRODUCTION-0001 independently attempted to reproduce EVIDENCE-0001",
+    "the reproduction did not reproduce the original watermark signal above threshold",
+    "EVIDENCE-0005 was therefore introduced as material counter-evidence",
+    "FUSION-0002 incorporated the counter-evidence and produced a conflicted result",
+    "ASSESSMENT-0002 reflects the resulting unresolved evidentiary conflict"
+  ],
+  "change_summary": [
+    "current assessment changed from ASSESSMENT-0001 to ASSESSMENT-0002",
+    "assessment state changed from supported to disputed",
+    "protocol-level confidence changed from 0.86 to 0.58",
+    "legal effect changed from policy_dependent to human_review_required",
+    "ASSESSMENT-0001 remains preserved as an immutable historical record"
+  ],
+  "revision_state": "applied",
+  "created_by": "AUDITOR:revision-controller",
+  "created_at": "2026-09-06T01:45:00Z",
+  "effective_at": "2026-09-06T01:50:00Z",
+  "resolution_note": "The revision was applied after the challenge, independent reproduction, new counter-evidence, re-fusion, and revised assessment were recorded."
+}

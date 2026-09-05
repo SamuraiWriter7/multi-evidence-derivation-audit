@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-FAIL-CYCLE-001",
+  "fusion_id": "FUSION-FAIL-CYCLE-001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-FAIL-CYCLE-001"
+  ],
+  "relationship_refs": [],
+  "supporting_evidence_refs": [
+    "EVIDENCE-FAIL-CYCLE-001"
+  ],
+  "counter_evidence_refs": [],
+  "redundant_evidence_refs": [],
+  "effective_evidence_refs": [
+    "EVIDENCE-FAIL-CYCLE-001"
+  ],
+  "evidence_diversity": 1,
+  "fusion_result": "weak_support",
+  "confidence": 0.4,
+  "basis": [
+    "fixture fusion"
+  ],
+  "uncertainty_factors": [],
+  "limitations": [],
+  "fusion_policy_ref": "FUSION-POLICY:MEDA-v0.4-reference",
+  "created_at": "2026-09-06T03:42:00Z"
+}

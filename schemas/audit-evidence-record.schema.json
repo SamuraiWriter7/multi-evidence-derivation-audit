@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.3/audit-evidence-record.schema.json",
+  "$id": "https://example.org/meda/v0.4/audit-evidence-record.schema.json",
   "title": "Audit Evidence Record",
   "description": "A machine-readable record describing one item of evidence relevant to a possible derivation relationship within an audit case. An evidence record is not itself a derivation verdict.",
   "type": "object",
@@ -21,7 +21,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "case_ref": {
       "type": "string",
@@ -41,6 +41,7 @@
         "training_attestation",
         "similarity",
         "white_box_lineage",
+        "reproduction_output",
         "other"
       ]
     },
@@ -91,8 +92,7 @@
       "type": [
         "string",
         "null"
-      ],
-      "description": "Reference to the underlying event from which this evidence was derived, when known."
+      ]
     },
     "source_artifact_refs": {
       "type": "array",

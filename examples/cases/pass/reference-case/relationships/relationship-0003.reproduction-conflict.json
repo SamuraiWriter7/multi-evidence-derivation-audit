@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-0001",
+  "relationship_id": "REL-0003",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0005"
+  ],
+  "dependency_type": "independent",
+  "evidentiary_effect": "conflicting",
+  "dependency_source_ref": null,
+  "basis": [
+    "EVIDENCE-0001 detected the declared watermark signal above threshold",
+    "EVIDENCE-0005 was produced by an independent reproduction and did not detect the same signal above threshold",
+    "the two evidence records therefore materially conflict regarding reproducibility of the watermark observation"
+  ],
+  "confidence": 0.95,
+  "assumptions": [
+    "the reproduction procedure was sufficiently comparable to the original procedure",
+    "the independent reproduction operator did not reuse the original output set"
+  ],
+  "limitations": [
+    "failure to reproduce does not independently establish that the original measurement was invalid"
+  ],
+  "created_at": "2026-09-06T01:15:00Z"
+}

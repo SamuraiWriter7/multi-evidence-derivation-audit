@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.3/zk-audit-attestation.schema.json",
+  "$id": "https://example.org/meda/v0.4/zk-audit-attestation.schema.json",
   "title": "Zero-Knowledge Audit Attestation",
   "description": "A cryptographic attestation that a declared audit predicate or computation has been proven without exposing protected inputs. The attestation belongs to a declared audit case and does not independently establish causal derivation, legal liability, or royalty obligation.",
   "type": "object",
@@ -24,7 +24,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "case_ref": {
       "type": "string",
@@ -60,6 +60,9 @@
         "fusion",
         "assessment",
         "case",
+        "challenge",
+        "reproduction",
+        "revision",
         "other"
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3.0",
+  "schema_version": "0.4.0",
   "case_ref": "CASE-0001",
   "relationship_id": "REL-0002",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -12,16 +12,16 @@
   "evidentiary_effect": "corroborating",
   "dependency_source_ref": null,
   "basis": [
-    "the watermark probe and behavioral similarity evaluation were produced by different measurement procedures",
-    "the two evidence items rely on different source artifacts and source events",
-    "both evidence items support the same derivation hypothesis through materially different evidentiary channels"
+    "the watermark and behavioral similarity measurements use different procedures",
+    "the evidence items rely on different source events and artifacts",
+    "both originally supported the same derivation hypothesis"
   ],
   "confidence": 0.9,
   "assumptions": [
-    "the two evaluation pipelines did not share hidden derived measurements"
+    "the evaluation pipelines did not share hidden derived measurements"
   ],
   "limitations": [
-    "methodological independence does not guarantee causal independence of all underlying model behaviors"
+    "methodological independence does not establish causal independence"
   ],
-  "created_at": "2026-09-04T00:25:00Z"
+  "created_at": "2026-09-06T00:25:00Z"
 }

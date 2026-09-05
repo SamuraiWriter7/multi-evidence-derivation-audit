@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-FAIL-ORPHAN-001",
+  "evidence_id": "EVIDENCE-FAIL-REPRO-001",
+  "evidence_type": "reproduction_output",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "independent reproduction fixture",
+  "maturity": "experimental",
+  "observation": {
+    "reproduction_ref": "REPRODUCTION-MISSING-001",
+    "signal_detected": false,
+    "observed_z_score": 1.5
+  },
+  "statistic": 1.5,
+  "threshold": 4.0,
+  "calibration_ref": "CALIBRATION:fixture-v1",
+  "source_event_ref": "EVENT:fail-orphan-001",
+  "source_artifact_refs": [],
+  "assumptions": [],
+  "limitations": [
+    "this fixture intentionally points to a missing reproduction record"
+  ],
+  "artifact_refs": [],
+  "collected_at": "2026-09-06T03:11:00Z",
+  "collected_by": "AUDITOR:fixture",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "challenge_status": "unchallenged"
+}

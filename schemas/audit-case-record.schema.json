@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.3/audit-case-record.schema.json",
+  "$id": "https://example.org/meda/v0.4/audit-case-record.schema.json",
   "title": "Audit Case Record",
-  "description": "A case-level envelope that groups evidence, evidence relationships, evidence fusion records, derivation assessments, and audit attestations belonging to the same origin-derivative audit context.",
+  "description": "A case-level envelope that groups evidence, evidence relationships, evidence fusion records, derivation assessments, attestations, challenges, reproductions, and assessment revisions belonging to the same origin-derivative audit context.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -16,6 +16,9 @@
     "fusion_refs",
     "assessment_refs",
     "attestation_refs",
+    "challenge_refs",
+    "reproduction_refs",
+    "revision_refs",
     "current_assessment_ref",
     "protocol_version",
     "created_at",
@@ -24,7 +27,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "case_id": {
       "type": "string",
@@ -45,6 +48,9 @@
         "collecting_evidence",
         "fusion_ready",
         "assessed",
+        "under_challenge",
+        "reproducing",
+        "revision_pending",
         "disputed",
         "closed"
       ]
@@ -94,6 +100,33 @@
       "uniqueItems": true,
       "default": []
     },
+    "challenge_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "reproduction_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "revision_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
     "current_assessment_ref": {
       "type": [
         "string",
@@ -108,7 +141,7 @@
     },
     "protocol_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "created_at": {
       "type": "string",
@@ -126,6 +159,7 @@
           "case_state": {
             "enum": [
               "assessed",
+              "revision_pending",
               "disputed",
               "closed"
             ]
@@ -137,11 +171,52 @@
       },
       "then": {
         "properties": {
+          "assessment_refs": {
+            "minItems": 1
+          },
           "current_assessment_ref": {
             "type": "string",
             "minLength": 1
-          },
-          "assessment_refs": {
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_state": {
+            "enum": [
+              "under_challenge",
+              "disputed"
+            ]
+          }
+        },
+        "required": [
+          "case_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "challenge_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_state": {
+            "const": "revision_pending"
+          }
+        },
+        "required": [
+          "case_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "revision_refs": {
             "minItems": 1
           }
         }

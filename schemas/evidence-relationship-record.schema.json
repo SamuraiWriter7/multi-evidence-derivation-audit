@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.3/evidence-relationship-record.schema.json",
+  "$id": "https://example.org/meda/v0.4/evidence-relationship-record.schema.json",
   "title": "Evidence Relationship Record",
   "description": "A record describing dependency and evidentiary relationships among two or more evidence items belonging to the same audit case.",
   "type": "object",
@@ -20,7 +20,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "case_ref": {
       "type": "string",

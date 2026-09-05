@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.4/reproduction-record.schema.json",
+  "title": "Reproduction Record",
+  "description": "A machine-readable record describing an independent or controlled attempt to reproduce, replay, remeasure, or reassess a prior MEDA audit result. A reproduction record remains separate from the original record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_ref",
+    "reproduction_id",
+    "origin_ref",
+    "derivative_ref",
+    "target_record_type",
+    "target_record_ref",
+    "reproduction_type",
+    "method",
+    "input_refs",
+    "outcome",
+    "result_summary",
+    "performed_at",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.4.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reproduction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_record_type": {
+      "type": "string",
+      "enum": [
+        "evidence",
+        "relationship",
+        "fusion",
+        "assessment",
+        "attestation"
+      ]
+    },
+    "target_record_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "challenge_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "reproduction_type": {
+      "type": "string",
+      "enum": [
+        "exact_replay",
+        "controlled_reproduction",
+        "independent_replication",
+        "remeasurement",
+        "recalibration",
+        "partial_reproduction"
+      ]
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "input_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "performed_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "independent_operator": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "reproduced",
+        "partially_reproduced",
+        "not_reproduced",
+        "inconclusive",
+        "failed"
+      ]
+    },
+    "result_summary": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "produced_evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "limitations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "performed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "digest"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha384",
+            "sha512",
+            "other"
+          ]
+        },
+        "digest": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.4.0",
+  "case_id": "CASE-FAIL-CHALLENGE-001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "case_state": "under_challenge",
+  "evidence_refs": [],
+  "relationship_refs": [],
+  "fusion_refs": [],
+  "assessment_refs": [],
+  "attestation_refs": [],
+  "challenge_refs": [
+    "CHALLENGE-FAIL-TARGET-001"
+  ],
+  "reproduction_refs": [],
+  "revision_refs": [],
+  "current_assessment_ref": null,
+  "case_policy_ref": "CASE-POLICY:MEDA-v0.4-reference",
+  "protocol_version": "0.4.0",
+  "created_at": "2026-09-06T03:00:00Z",
+  "updated_at": "2026-09-06T03:01:00Z"
+}

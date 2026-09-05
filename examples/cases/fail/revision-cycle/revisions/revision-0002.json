@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-FAIL-CYCLE-001",
+  "revision_id": "REVISION-FAIL-CYCLE-002",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "prior_assessment_ref": "ASSESSMENT-FAIL-CYCLE-002",
+  "revised_assessment_ref": "ASSESSMENT-FAIL-CYCLE-001",
+  "revision_trigger": "metadata_correction",
+  "trigger_refs": [
+    "ARTIFACT:cycle-trigger-002"
+  ],
+  "challenge_refs": [],
+  "reproduction_refs": [],
+  "evidence_added_refs": [],
+  "evidence_removed_refs": [],
+  "fusion_refs": [
+    "FUSION-FAIL-CYCLE-001"
+  ],
+  "revision_basis": [
+    "this fixture intentionally creates a backward revision edge"
+  ],
+  "change_summary": [
+    "assessment two incorrectly revises back to assessment one"
+  ],
+  "revision_state": "applied",
+  "created_by": "AUDITOR:fixture",
+  "created_at": "2026-09-06T03:47:00Z",
+  "effective_at": "2026-09-06T03:48:00Z",
+  "resolution_note": null
+}

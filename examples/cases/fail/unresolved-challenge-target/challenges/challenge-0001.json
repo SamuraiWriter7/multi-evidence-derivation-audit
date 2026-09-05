@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-FAIL-CHALLENGE-001",
+  "challenge_id": "CHALLENGE-FAIL-TARGET-001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "target_record_type": "assessment",
+  "target_record_ref": "ASSESSMENT-MISSING-001",
+  "challenge_scope": "confidence",
+  "challenge_basis": [
+    "this fixture intentionally challenges an assessment that does not exist in the audit graph"
+  ],
+  "related_evidence_refs": [],
+  "supporting_artifact_refs": [],
+  "requested_action": "review",
+  "raised_by": "REVIEWER:fixture",
+  "challenge_status": "open",
+  "resolution_note": null,
+  "raised_at": "2026-09-06T03:01:00Z",
+  "resolved_at": null
+}

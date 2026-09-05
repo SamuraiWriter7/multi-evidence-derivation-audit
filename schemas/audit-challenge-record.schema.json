@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.4/audit-challenge-record.schema.json",
+  "title": "Audit Challenge Record",
+  "description": "A machine-readable record describing a challenge against a specific audit record, method, assumption, interpretation, or assessment conclusion. A challenge does not itself invalidate the challenged record.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_ref",
+    "challenge_id",
+    "origin_ref",
+    "derivative_ref",
+    "target_record_type",
+    "target_record_ref",
+    "challenge_scope",
+    "challenge_basis",
+    "requested_action",
+    "challenge_status",
+    "raised_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.4.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "challenge_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_record_type": {
+      "type": "string",
+      "enum": [
+        "case",
+        "evidence",
+        "relationship",
+        "fusion",
+        "assessment",
+        "attestation",
+        "reproduction",
+        "revision"
+      ]
+    },
+    "target_record_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "challenge_scope": {
+      "type": "string",
+      "enum": [
+        "provenance",
+        "integrity",
+        "method",
+        "assumption",
+        "measurement",
+        "calibration",
+        "dependency",
+        "interpretation",
+        "confidence",
+        "assessment_state",
+        "legal_effect",
+        "other"
+      ]
+    },
+    "challenge_basis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "related_evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "supporting_artifact_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "requested_action": {
+      "type": "string",
+      "enum": [
+        "review",
+        "reproduce",
+        "remeasure",
+        "recalibrate",
+        "reclassify",
+        "provide_additional_evidence",
+        "correct_metadata",
+        "reassess",
+        "other"
+      ]
+    },
+    "raised_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "challenge_status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "under_review",
+        "accepted",
+        "rejected",
+        "withdrawn",
+        "resolved"
+      ]
+    },
+    "resolution_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "raised_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resolved_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "challenge_status": {
+            "enum": [
+              "accepted",
+              "rejected",
+              "withdrawn",
+              "resolved"
+            ]
+          }
+        },
+        "required": [
+          "challenge_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "resolution_note",
+          "resolved_at"
+        ],
+        "properties": {
+          "resolution_note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  ]
+}

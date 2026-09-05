@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.3/evidence-fusion-record.schema.json",
+  "$id": "https://example.org/meda/v0.4/evidence-fusion-record.schema.json",
   "title": "Evidence Fusion Record",
   "description": "A record describing how multiple evidence items and their relationships were combined into an explainable evidentiary result without treating record count as evidence strength.",
   "type": "object",
@@ -26,7 +26,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.3.0"
+      "const": "0.4.0"
     },
     "case_ref": {
       "type": "string",
@@ -92,8 +92,7 @@
       "items": {
         "type": "string",
         "minLength": 1
-      },
-      "description": "Evidence items treated as materially effective after dependency and redundancy analysis."
+      }
     },
     "evidence_diversity": {
       "type": "integer",

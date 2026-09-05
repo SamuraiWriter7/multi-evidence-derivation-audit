@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-0001",
+  "evidence_id": "EVIDENCE-0005",
+  "evidence_type": "reproduction_output",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "independent reproduction of the declared watermark detection procedure",
+  "maturity": "emerging",
+  "observation": {
+    "reproduction_ref": "REPRODUCTION-0001",
+    "signal_detected": false,
+    "sample_count": 120,
+    "sampling_policy": "controlled_probe_set_v1-reproduction",
+    "detector_version": "1.0.0",
+    "observed_z_score": 1.63
+  },
+  "statistic": 1.63,
+  "threshold": 4.0,
+  "calibration_ref": "CALIBRATION:watermark-detector-v1",
+  "source_event_ref": "EVENT:reproduction-session-0001",
+  "source_artifact_refs": [
+    "ARTIFACT:reproduction-output-set-0001"
+  ],
+  "assumptions": [
+    "the independent operator received the declared detector specification",
+    "the reproduction used equivalent declared sampling parameters",
+    "the reproduction probe set was generated independently of the original output set"
+  ],
+  "limitations": [
+    "failure to reproduce the watermark signal does not automatically invalidate EVIDENCE-0001",
+    "differences between original and reproduction probe populations may affect the observed statistic",
+    "this record constitutes additional counter-evidence rather than an automatic verdict"
+  ],
+  "artifact_refs": [
+    "ARTIFACT:reproduction-probe-set-0001",
+    "ARTIFACT:reproduction-output-set-0001",
+    "ARTIFACT:reproduction-detector-config-0001"
+  ],
+  "collected_at": "2026-09-06T01:10:00Z",
+  "collected_by": "AUDITOR:independent-reproduction-node",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "challenge_status": "unchallenged"
+}

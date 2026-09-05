@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3.0",
+  "schema_version": "0.4.0",
   "case_ref": "CASE-0001",
   "evidence_id": "EVIDENCE-0001",
   "evidence_type": "watermark",
@@ -23,7 +23,7 @@
   "assumptions": [
     "probe prompts were selected before evaluation",
     "detector parameters were fixed before measurement",
-    "sampling conditions were held constant during the audit"
+    "sampling conditions were held constant during the original audit"
   ],
   "limitations": [
     "watermark detection alone does not prove derivation",
@@ -35,11 +35,11 @@
     "ARTIFACT:probe-output-set-0001",
     "ARTIFACT:detector-config-0001"
   ],
-  "collected_at": "2026-09-04T00:05:00Z",
+  "collected_at": "2026-09-06T00:05:00Z",
   "collected_by": "AUDITOR:reference-node",
   "integrity": {
     "algorithm": "sha256",
     "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
-  "challenge_status": "unchallenged"
+  "challenge_status": "challenged"
 }

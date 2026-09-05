@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.4.0",
+  "case_id": "CASE-FAIL-ORPHAN-001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "case_state": "collecting_evidence",
+  "evidence_refs": [
+    "EVIDENCE-FAIL-REPRO-001"
+  ],
+  "relationship_refs": [],
+  "fusion_refs": [],
+  "assessment_refs": [],
+  "attestation_refs": [],
+  "challenge_refs": [],
+  "reproduction_refs": [],
+  "revision_refs": [],
+  "current_assessment_ref": null,
+  "case_policy_ref": "CASE-POLICY:MEDA-v0.4-reference",
+  "protocol_version": "0.4.0",
+  "created_at": "2026-09-06T03:10:00Z",
+  "updated_at": "2026-09-06T03:11:00Z"
+}

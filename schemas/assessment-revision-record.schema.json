@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.4/assessment-revision-record.schema.json",
+  "title": "Assessment Revision Record",
+  "description": "A machine-readable record describing a proposed or applied transition from one derivation assessment to another while preserving the prior assessment and the reasons for revision.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_ref",
+    "revision_id",
+    "origin_ref",
+    "derivative_ref",
+    "prior_assessment_ref",
+    "revised_assessment_ref",
+    "revision_trigger",
+    "trigger_refs",
+    "revision_basis",
+    "revision_state",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.4.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prior_assessment_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revised_assessment_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision_trigger": {
+      "type": "string",
+      "enum": [
+        "challenge",
+        "reproduction",
+        "new_evidence",
+        "new_fusion",
+        "policy_change",
+        "metadata_correction",
+        "method_correction",
+        "other"
+      ]
+    },
+    "trigger_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "challenge_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "reproduction_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "evidence_added_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "evidence_removed_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "fusion_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "revision_basis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "change_summary": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "revision_state": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "applied",
+        "rejected",
+        "withdrawn"
+      ]
+    },
+    "created_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "resolution_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "revision_state": {
+            "const": "applied"
+          }
+        },
+        "required": [
+          "revision_state"
+        ]
+      },
+      "then": {
+        "required": [
+          "effective_at"
+        ],
+        "properties": {
+          "effective_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "revision_state": {
+            "enum": [
+              "rejected",
+              "withdrawn"
+            ]
+          }
+        },
+        "required": [
+          "revision_state"
+        ]
+      },
+      "then": {
+        "required": [
+          "resolution_note"
+        ],
+        "properties": {
+          "resolution_note": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}

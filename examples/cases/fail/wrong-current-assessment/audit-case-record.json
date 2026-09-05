@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.4.0",
+  "case_id": "CASE-FAIL-CURRENT-001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "case_state": "assessed",
+  "evidence_refs": [
+    "EVIDENCE-FAIL-CURRENT-001"
+  ],
+  "relationship_refs": [],
+  "fusion_refs": [
+    "FUSION-FAIL-CURRENT-001"
+  ],
+  "assessment_refs": [
+    "ASSESSMENT-FAIL-CURRENT-001",
+    "ASSESSMENT-FAIL-CURRENT-002"
+  ],
+  "attestation_refs": [],
+  "challenge_refs": [],
+  "reproduction_refs": [],
+  "revision_refs": [
+    "REVISION-FAIL-CURRENT-001"
+  ],
+  "current_assessment_ref": "ASSESSMENT-FAIL-CURRENT-001",
+  "case_policy_ref": "CASE-POLICY:MEDA-v0.4-reference",
+  "protocol_version": "0.4.0",
+  "created_at": "2026-09-06T03:30:00Z",
+  "updated_at": "2026-09-06T03:36:00Z"
+}

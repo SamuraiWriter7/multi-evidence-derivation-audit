@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3.0",
+  "schema_version": "0.4.0",
   "case_ref": "CASE-0001",
   "assessment_id": "ASSESSMENT-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -16,21 +16,18 @@
   "assessment_state": "supported",
   "confidence": 0.86,
   "assessment_basis": [
-    "FUSION-0001 produced strong protocol-level evidentiary support",
-    "three materially distinct evidence channels remained after same-source redundancy analysis",
-    "the signed receipt and API trace were not counted as fully independent observations",
-    "no material counter-evidence was identified in the referenced fusion",
-    "the available evidence supports further policy or human review without independently establishing legal liability"
+    "FUSION-0001 produced strong protocol-level support",
+    "three materially distinct evidence channels remained after redundancy analysis",
+    "no material counter-evidence was available at the time of assessment"
   ],
   "conflicting_evidence_refs": [],
   "limitations": [
     "no complete white-box training history was available",
     "the assessment does not establish copyright infringement",
-    "the assessment does not establish a specific percentage of causal derivation",
-    "the confidence value represents protocol-level evidentiary confidence rather than legal probability"
+    "the confidence value is evidentiary rather than legal probability"
   ],
-  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.3-reference",
+  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.4-reference",
   "legal_effect": "policy_dependent",
-  "protocol_version": "0.3.0",
-  "created_at": "2026-09-04T00:40:00Z"
+  "protocol_version": "0.4.0",
+  "created_at": "2026-09-06T00:40:00Z"
 }

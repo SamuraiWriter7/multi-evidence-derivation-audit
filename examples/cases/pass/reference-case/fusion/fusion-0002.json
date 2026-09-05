@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.4.0",
+  "case_ref": "CASE-0001",
+  "fusion_id": "FUSION-0002",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004",
+    "EVIDENCE-0005"
+  ],
+  "relationship_refs": [
+    "REL-0001",
+    "REL-0002",
+    "REL-0003"
+  ],
+  "supporting_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "counter_evidence_refs": [
+    "EVIDENCE-0005"
+  ],
+  "redundant_evidence_refs": [
+    "EVIDENCE-0003"
+  ],
+  "effective_evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0004",
+    "EVIDENCE-0005"
+  ],
+  "evidence_diversity": 4,
+  "fusion_result": "conflicted",
+  "confidence": 0.58,
+  "basis": [
+    "the original watermark, authenticated access, and similarity evidence continue to support the derivation hypothesis",
+    "EVIDENCE-0003 remains redundant with EVIDENCE-0002",
+    "the independent reproduction represented by EVIDENCE-0005 did not reproduce the original watermark signal",
+    "REL-0003 therefore introduces material counter-evidence against the reproducibility of one important supporting signal",
+    "the combined evidentiary picture is materially conflicted"
+  ],
+  "uncertainty_factors": [
+    "the original and reproduction probe populations were not identical",
+    "complete training data remains unavailable",
+    "behavioral similarity is not uniquely causal",
+    "watermark reproducibility is now contested"
+  ],
+  "limitations": [
+    "a conflicted fusion result does not establish that the original evidence was false",
+    "the confidence value is protocol-level and is not a legal probability",
+    "the fusion result does not autonomously determine infringement or royalty liability"
+  ],
+  "fusion_policy_ref": "FUSION-POLICY:MEDA-v0.4-reference",
+  "created_at": "2026-09-06T01:25:00Z"
+}

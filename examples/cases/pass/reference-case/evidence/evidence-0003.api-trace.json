@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.3.0",
+  "schema_version": "0.4.0",
   "case_ref": "CASE-0001",
   "evidence_id": "EVIDENCE-0003",
   "evidence_type": "api_trace",
@@ -27,14 +27,14 @@
   ],
   "limitations": [
     "the trace originates from the same underlying API event as EVIDENCE-0002",
-    "the trace must not be counted as fully independent corroboration of that event",
+    "the trace must not be counted as fully independent corroboration",
     "API access does not by itself prove downstream training use"
   ],
   "artifact_refs": [
     "ARTIFACT:api-gateway-log-9918",
     "ARTIFACT:request-metadata-9918"
   ],
-  "collected_at": "2026-09-04T00:12:00Z",
+  "collected_at": "2026-09-06T00:12:00Z",
   "collected_by": "AUDITOR:reference-node",
   "integrity": {
     "algorithm": "sha256",

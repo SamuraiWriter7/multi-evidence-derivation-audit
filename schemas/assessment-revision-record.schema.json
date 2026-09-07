@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.4/assessment-revision-record.schema.json",
+  "$id": "https://example.org/meda/v0.5/assessment-revision-record.schema.json",
   "title": "Assessment Revision Record",
-  "description": "A machine-readable record describing a proposed or applied transition from one derivation assessment to another while preserving the prior assessment and the reasons for revision.",
+  "description": "A machine-readable record describing a proposed or applied non-destructive transition from one derivation assessment to another while preserving the prior assessment and the provenance of the revision.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -22,7 +22,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "case_ref": {
       "type": "string",
@@ -55,6 +55,8 @@
         "reproduction",
         "new_evidence",
         "new_fusion",
+        "auditor_opinion",
+        "reconciliation",
         "policy_change",
         "metadata_correction",
         "method_correction",

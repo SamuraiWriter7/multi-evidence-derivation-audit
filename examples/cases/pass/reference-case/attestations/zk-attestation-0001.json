@@ -1,10 +1,10 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "attestation_id": "ZK-ATTESTATION-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
   "derivative_ref": "MODEL:student-beta:v1",
-  "predicate": "The original committed evidence set was evaluated under the declared fusion predicate and produced the public FUSION-0001 result without exposing protected committed inputs.",
+  "predicate": "The original committed evidence set was evaluated under the declared fusion predicate and produced FUSION-0001.",
   "predicate_version": "fusion-audit-predicate-v1",
   "audit_context_type": "fusion",
   "audit_context_ref": "FUSION-0001",
@@ -15,7 +15,7 @@
     "derivative_ref": "MODEL:student-beta:v1",
     "fusion_ref": "FUSION-0001",
     "fusion_result": "strong_support",
-    "protocol_version": "0.4.0"
+    "protocol_version": "0.5.0"
   },
   "committed_inputs": [
     "EVIDENCE-0001",
@@ -29,6 +29,6 @@
   "verification_method_ref": "VERIFIER-METHOD:reference-v1",
   "verifier_ref": "VERIFIER:reference-node",
   "verification_status": "verified",
-  "scope_note": "This attestation proves only the declared original fusion predicate. It does not prevent later challenge, reproduction, revision, or reassessment and does not independently establish legal liability or royalty obligation.",
-  "created_at": "2026-09-06T00:45:00Z"
+  "scope_note": "This attestation proves only the declared fusion predicate and does not prevent later challenge, reproduction, reconciliation, handoff, or external review.",
+  "created_at": "2026-09-07T00:45:00Z"
 }

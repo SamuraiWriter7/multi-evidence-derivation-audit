@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.5.0",
+  "case_ref": "CASE-0001",
+  "handoff_id": "HANDOFF-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "assessment_refs": [
+    "ASSESSMENT-0002"
+  ],
+  "opinion_refs": [
+    "OPINION-0001",
+    "OPINION-0002"
+  ],
+  "reconciliation_refs": [
+    "RECONCILIATION-0001"
+  ],
+  "challenge_refs": [
+    "CHALLENGE-0001"
+  ],
+  "reproduction_refs": [
+    "REPRODUCTION-0001"
+  ],
+  "revision_refs": [
+    "REVISION-0001"
+  ],
+  "handoff_target": {
+    "target_type": "human_review",
+    "target_ref": "REVIEW-QUEUE:external-human-review-v1",
+    "target_label": "Independent External Human Review"
+  },
+  "handoff_scope": [
+    "audit_context",
+    "assessment_review",
+    "dispute_review"
+  ],
+  "payload_refs": [
+    "ASSESSMENT-0002",
+    "OPINION-0001",
+    "OPINION-0002",
+    "RECONCILIATION-0001",
+    "FUSION-0002",
+    "CHALLENGE-0001",
+    "REPRODUCTION-0001",
+    "REVISION-0001"
+  ],
+  "unresolved_point_refs": [
+    "RECON-UNRESOLVED-MISSING-001"
+  ],
+  "handoff_reason": [
+    "the current assessment remains disputed",
+    "independent auditors disagree about the residual evidentiary weight of the watermark observation",
+    "causal downstream training incorporation remains unresolved",
+    "the unresolved questions require authority outside MEDA"
+  ],
+  "limitations": [
+    "MEDA does not determine the external review outcome",
+    "handoff does not establish infringement, liability, royalty entitlement, allocation, or settlement"
+  ],
+  "excluded_decisions": [
+    "derivation_verdict",
+    "copyright_infringement",
+    "legal_liability",
+    "license_creation",
+    "royalty_entitlement",
+    "royalty_allocation",
+    "settlement_instruction"
+  ],
+  "handoff_status": "accepted",
+  "decision_authority": "external",
+  "handoff_effect": "transfer_only",
+  "legal_effect": "none",
+  "external_process_ref": "EXTERNAL-PROCESS:HUMAN-REVIEW-0001",
+  "external_decision_ref": null,
+  "response_note": "The external review process accepted the audit package for independent consideration. No external decision has been issued.",
+  "created_at": "2026-09-07T02:20:00Z",
+  "transmitted_at": "2026-09-07T02:22:00Z",
+  "responded_at": "2026-09-07T02:25:00Z"
+}

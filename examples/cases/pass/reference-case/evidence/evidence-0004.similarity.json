@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "evidence_id": "EVIDENCE-0004",
   "evidence_type": "similarity",
@@ -23,8 +23,7 @@
   ],
   "assumptions": [
     "the probe set was fixed before evaluation",
-    "the compared models were evaluated under equivalent sampling conditions",
-    "the similarity metric was selected before observing the final score"
+    "the models were evaluated under equivalent sampling conditions"
   ],
   "limitations": [
     "behavioral similarity may arise without direct derivation",
@@ -32,10 +31,9 @@
   ],
   "artifact_refs": [
     "ARTIFACT:behavioral-probe-set-v1",
-    "ARTIFACT:similarity-output-set-0001",
-    "ARTIFACT:similarity-config-0001"
+    "ARTIFACT:similarity-output-set-0001"
   ],
-  "collected_at": "2026-09-06T00:18:00Z",
+  "collected_at": "2026-09-07T00:18:00Z",
   "collected_by": "AUDITOR:reference-node",
   "integrity": {
     "algorithm": "sha256",

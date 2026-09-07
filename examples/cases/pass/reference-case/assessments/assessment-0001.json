@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "assessment_id": "ASSESSMENT-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -17,17 +17,14 @@
   "confidence": 0.86,
   "assessment_basis": [
     "FUSION-0001 produced strong protocol-level support",
-    "three materially distinct evidence channels remained after redundancy analysis",
-    "no material counter-evidence was available at the time of assessment"
+    "no material counter-evidence was available at that time"
   ],
   "conflicting_evidence_refs": [],
   "limitations": [
-    "no complete white-box training history was available",
-    "the assessment does not establish copyright infringement",
-    "the confidence value is evidentiary rather than legal probability"
+    "the assessment does not establish copyright infringement"
   ],
-  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.4-reference",
+  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.5-reference",
   "legal_effect": "policy_dependent",
-  "protocol_version": "0.4.0",
-  "created_at": "2026-09-06T00:40:00Z"
+  "protocol_version": "0.5.0",
+  "created_at": "2026-09-07T00:40:00Z"
 }

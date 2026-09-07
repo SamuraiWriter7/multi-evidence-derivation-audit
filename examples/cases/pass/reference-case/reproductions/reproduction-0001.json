@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "reproduction_id": "REPRODUCTION-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -10,7 +10,7 @@
     "CHALLENGE-0001"
   ],
   "reproduction_type": "independent_replication",
-  "method": "Independent execution of the declared watermark detector under controlled sampling conditions using a newly generated probe output set.",
+  "method": "Independent execution of the declared watermark detector under controlled sampling conditions.",
   "method_ref": "METHOD:watermark-reproduction-v1",
   "input_refs": [
     "ARTIFACT:probe-set-specification-v1",
@@ -21,26 +21,23 @@
     "detector_version": "1.0.0",
     "sample_count": 120,
     "threshold": 4.0,
-    "operator_domain": "independent",
-    "sampling_policy": "controlled_probe_set_v1-reproduction"
+    "operator_domain": "independent"
   },
   "performed_by": "AUDITOR:independent-reproduction-node",
   "independent_operator": true,
   "outcome": "not_reproduced",
   "result_summary": [
     "the reproduction produced a z-score of 1.63",
-    "the declared detection threshold was 4.0",
-    "the original watermark signal was not reproduced under this reproduction run",
-    "the result is treated as additional counter-evidence rather than automatic invalidation of EVIDENCE-0001"
+    "the original watermark signal was not reproduced",
+    "the result was treated as additional counter-evidence"
   ],
   "produced_evidence_refs": [
     "EVIDENCE-0005"
   ],
   "limitations": [
-    "the reproduction output population was independently generated and therefore not identical to the original population",
-    "one failed reproduction is insufficient to determine that the original observation was erroneous"
+    "one failed reproduction is insufficient to prove that the original observation was erroneous"
   ],
-  "performed_at": "2026-09-06T01:05:00Z",
+  "performed_at": "2026-09-07T01:05:00Z",
   "integrity": {
     "algorithm": "sha256",
     "digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"

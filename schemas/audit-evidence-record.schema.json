@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.4/audit-evidence-record.schema.json",
+  "$id": "https://example.org/meda/v0.5/audit-evidence-record.schema.json",
   "title": "Audit Evidence Record",
   "description": "A machine-readable record describing one item of evidence relevant to a possible derivation relationship within an audit case. An evidence record is not itself a derivation verdict.",
   "type": "object",
@@ -21,7 +21,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "case_ref": {
       "type": "string",
@@ -96,38 +96,38 @@
     },
     "source_artifact_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "assumptions": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "limitations": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "artifact_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "collected_at": {

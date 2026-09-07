@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.4/reproduction-record.schema.json",
+  "$id": "https://example.org/meda/v0.5/reproduction-record.schema.json",
   "title": "Reproduction Record",
-  "description": "A machine-readable record describing an independent or controlled attempt to reproduce, replay, remeasure, or reassess a prior MEDA audit result. A reproduction record remains separate from the original record.",
+  "description": "A machine-readable record describing an independent or controlled attempt to reproduce, replay, remeasure, or reassess a prior MEDA audit result. A reproduction remains separate from the original record.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -24,7 +24,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "case_ref": {
       "type": "string",

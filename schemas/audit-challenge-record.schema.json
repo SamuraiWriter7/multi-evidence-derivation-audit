@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.4/audit-challenge-record.schema.json",
+  "$id": "https://example.org/meda/v0.5/audit-challenge-record.schema.json",
   "title": "Audit Challenge Record",
-  "description": "A machine-readable record describing a challenge against a specific audit record, method, assumption, interpretation, or assessment conclusion. A challenge does not itself invalidate the challenged record.",
+  "description": "A machine-readable record describing a challenge against a specific audit record, method, assumption, interpretation, opinion, reconciliation, or handoff. A challenge does not itself invalidate the challenged record.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -22,7 +22,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "case_ref": {
       "type": "string",
@@ -50,7 +50,10 @@
         "assessment",
         "attestation",
         "reproduction",
-        "revision"
+        "revision",
+        "opinion",
+        "reconciliation",
+        "handoff"
       ]
     },
     "target_record_ref": {
@@ -71,6 +74,11 @@
         "confidence",
         "assessment_state",
         "legal_effect",
+        "auditor_independence",
+        "opinion_basis",
+        "reconciliation",
+        "handoff_scope",
+        "authority_boundary",
         "other"
       ]
     },
@@ -111,6 +119,8 @@
         "provide_additional_evidence",
         "correct_metadata",
         "reassess",
+        "reconcile",
+        "review_handoff",
         "other"
       ]
     },

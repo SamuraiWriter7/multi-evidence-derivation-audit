@@ -1,8 +1,8 @@
 {
   "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
-  "opinion_id": "OPINION-0001",
-  "auditor_ref": "AUDITOR:panel-member-a",
+  "opinion_id": "OPINION-0002",
+  "auditor_ref": "AUDITOR:panel-member-b",
   "auditor_type": "human",
   "organization_ref": "ORG:independent-audit-panel",
   "credential_refs": [
@@ -26,28 +26,28 @@
   "reproduction_refs": [
     "REPRODUCTION-0001"
   ],
-  "position": "partially_supports",
-  "confidence": 0.62,
+  "position": "disputes",
+  "confidence": 0.57,
   "independence_status": "independent",
   "dependency_refs": [],
   "opinion_basis": [
-    "authenticated access evidence remains materially relevant",
-    "behavioral similarity continues to provide limited corroborating support",
-    "the failed watermark reproduction materially weakens but does not erase the original signal"
+    "the original watermark observation was not independently reproduced",
+    "behavioral similarity does not uniquely establish causal derivation",
+    "authenticated access establishes access but not training incorporation"
   ],
   "agreed_points": [
     "an authenticated API access event occurred",
     "the watermark evidence is materially contested"
   ],
   "disputed_points": [
-    "the failed reproduction is not sufficient to discard all support from the original watermark evidence"
+    "the existing evidence is insufficient to support a stable derivation conclusion"
   ],
   "unresolved_points": [
-    "whether accessed outputs were incorporated into training remains unresolved"
+    "whether accessed outputs entered downstream training remains unresolved"
   ],
   "limitations": [
-    "complete training records were not available"
+    "absence of complete training records prevents stronger conclusions"
   ],
   "effect_scope": "audit_only",
-  "created_at": "2026-09-07T02:00:00Z"
+  "created_at": "2026-09-07T02:05:00Z"
 }

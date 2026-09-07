@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/meda/v0.5/audit-handoff-record.schema.json",
+  "title": "Audit Handoff Record",
+  "description": "A machine-readable record documenting transfer of MEDA audit context to an external decision or review process. A handoff transfers evidence and audit context only and does not itself create a legal verdict, royalty entitlement, liability determination, allocation, or settlement instruction.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_ref",
+    "handoff_id",
+    "origin_ref",
+    "derivative_ref",
+    "assessment_refs",
+    "reconciliation_refs",
+    "handoff_target",
+    "handoff_scope",
+    "payload_refs",
+    "handoff_reason",
+    "handoff_status",
+    "decision_authority",
+    "handoff_effect",
+    "legal_effect",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.5.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "handoff_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "derivative_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assessment_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "opinion_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "reconciliation_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "challenge_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "reproduction_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "revision_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "handoff_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_type",
+        "target_ref"
+      ],
+      "properties": {
+        "target_type": {
+          "type": "string",
+          "enum": [
+            "human_review",
+            "policy_engine",
+            "legal_review",
+            "royalty_assessment",
+            "external_arbitration",
+            "governance_process",
+            "other"
+          ]
+        },
+        "target_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "target_type": {
+                "const": "other"
+              }
+            },
+            "required": [
+              "target_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "target_label": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "target_label"
+            ]
+          }
+        }
+      ]
+    },
+    "handoff_scope": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "audit_context",
+          "evidence_review",
+          "assessment_review",
+          "dispute_review",
+          "policy_review",
+          "legal_review",
+          "royalty_eligibility_review",
+          "governance_review",
+          "other"
+        ]
+      }
+    },
+    "payload_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "unresolved_point_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "handoff_reason": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "excluded_decisions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "derivation_verdict",
+          "copyright_infringement",
+          "legal_liability",
+          "license_creation",
+          "royalty_entitlement",
+          "royalty_allocation",
+          "settlement_instruction"
+        ]
+      },
+      "default": []
+    },
+    "handoff_status": {
+      "type": "string",
+      "enum": [
+        "prepared",
+        "transmitted",
+        "accepted",
+        "rejected",
+        "withdrawn"
+      ]
+    },
+    "decision_authority": {
+      "type": "string",
+      "const": "external"
+    },
+    "handoff_effect": {
+      "type": "string",
+      "const": "transfer_only"
+    },
+    "legal_effect": {
+      "type": "string",
+      "const": "none"
+    },
+    "external_process_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "external_decision_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "response_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "transmitted_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "responded_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "handoff_status": {
+            "enum": [
+              "transmitted",
+              "accepted",
+              "rejected"
+            ]
+          }
+        },
+        "required": [
+          "handoff_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "transmitted_at"
+        ],
+        "properties": {
+          "transmitted_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "handoff_status": {
+            "enum": [
+              "accepted",
+              "rejected"
+            ]
+          }
+        },
+        "required": [
+          "handoff_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "response_note",
+          "responded_at"
+        ],
+        "properties": {
+          "response_note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "responded_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  ]
+}

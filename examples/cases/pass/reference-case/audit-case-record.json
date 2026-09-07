@@ -1,9 +1,9 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_id": "CASE-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
   "derivative_ref": "MODEL:student-beta:v1",
-  "case_state": "disputed",
+  "case_state": "handed_off",
   "evidence_refs": [
     "EVIDENCE-0001",
     "EVIDENCE-0002",
@@ -36,9 +36,19 @@
   "revision_refs": [
     "REVISION-0001"
   ],
+  "opinion_refs": [
+    "OPINION-0001",
+    "OPINION-0002"
+  ],
+  "reconciliation_refs": [
+    "RECONCILIATION-0001"
+  ],
+  "handoff_refs": [
+    "HANDOFF-0001"
+  ],
   "current_assessment_ref": "ASSESSMENT-0002",
-  "case_policy_ref": "CASE-POLICY:MEDA-v0.4-reference",
-  "protocol_version": "0.4.0",
-  "created_at": "2026-09-06T00:00:00Z",
-  "updated_at": "2026-09-06T02:00:00Z"
+  "case_policy_ref": "CASE-POLICY:MEDA-v0.5-reference",
+  "protocol_version": "0.5.0",
+  "created_at": "2026-09-07T00:00:00Z",
+  "updated_at": "2026-09-07T02:30:00Z"
 }

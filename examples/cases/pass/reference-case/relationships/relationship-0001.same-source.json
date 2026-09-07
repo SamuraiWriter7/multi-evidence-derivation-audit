@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "relationship_id": "REL-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -12,15 +12,15 @@
   "evidentiary_effect": "corroborating",
   "dependency_source_ref": "EVENT:api-call-9918",
   "basis": [
-    "EVIDENCE-0002 and EVIDENCE-0003 derive from the same authenticated API event",
-    "the records corroborate that access event but must not be treated as fully independent evidence"
+    "both records derive from the same authenticated API event",
+    "they corroborate access but are not fully independent"
   ],
   "confidence": 1.0,
   "assumptions": [
-    "the shared source event identifier is authentic"
+    "the shared event identifier is authentic"
   ],
   "limitations": [
     "same-source corroboration does not increase independent evidence diversity"
   ],
-  "created_at": "2026-09-06T00:22:00Z"
+  "created_at": "2026-09-07T00:22:00Z"
 }

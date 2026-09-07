@@ -1,0 +1,121 @@
+{
+  "schema_version": "0.5.0",
+  "case_ref": "CASE-0001",
+  "reconciliation_id": "RECONCILIATION-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "assessment_refs": [
+    "ASSESSMENT-0002"
+  ],
+  "opinion_refs": [
+    "OPINION-0001",
+    "OPINION-0002"
+  ],
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0004",
+    "EVIDENCE-0005"
+  ],
+  "fusion_refs": [
+    "FUSION-0002"
+  ],
+  "challenge_refs": [
+    "CHALLENGE-0001"
+  ],
+  "reproduction_refs": [
+    "REPRODUCTION-0001"
+  ],
+  "reconciliation_method": "independent_panel",
+  "method_ref": "METHOD:MEDA-reconciliation-v1",
+  "majority_verdict_applied": false,
+  "agreed_points": [
+    {
+      "point_id": "RECON-AGREE-0001",
+      "statement": "An authenticated API access event occurred.",
+      "supporting_opinion_refs": [
+        "OPINION-0001",
+        "OPINION-0002"
+      ],
+      "evidence_refs": [
+        "EVIDENCE-0002"
+      ],
+      "assessment_refs": [
+        "ASSESSMENT-0002"
+      ]
+    },
+    {
+      "point_id": "RECON-AGREE-0002",
+      "statement": "The reproducibility of the original watermark observation is materially contested.",
+      "supporting_opinion_refs": [
+        "OPINION-0001",
+        "OPINION-0002"
+      ],
+      "evidence_refs": [
+        "EVIDENCE-0001",
+        "EVIDENCE-0005"
+      ],
+      "assessment_refs": [
+        "ASSESSMENT-0002"
+      ]
+    }
+  ],
+  "disputed_points": [
+    {
+      "point_id": "RECON-DISPUTE-0001",
+      "statement": "How much evidentiary weight should remain assigned to the original watermark observation after the failed reproduction.",
+      "positions": [
+        {
+          "position": "retain limited evidentiary weight",
+          "opinion_refs": [
+            "OPINION-0001"
+          ]
+        },
+        {
+          "position": "treat the watermark component as insufficiently stable for positive derivation support",
+          "opinion_refs": [
+            "OPINION-0002"
+          ]
+        }
+      ],
+      "evidence_refs": [
+        "EVIDENCE-0001",
+        "EVIDENCE-0005"
+      ],
+      "assessment_refs": [
+        "ASSESSMENT-0002"
+      ]
+    }
+  ],
+  "unresolved_points": [
+    {
+      "point_id": "RECON-UNRESOLVED-0001",
+      "statement": "Whether outputs obtained through the authenticated API access event were incorporated into downstream model training.",
+      "opinion_refs": [
+        "OPINION-0001",
+        "OPINION-0002"
+      ],
+      "unresolved_reason": "The available evidence establishes access but does not establish downstream training incorporation.",
+      "evidence_refs": [
+        "EVIDENCE-0002",
+        "EVIDENCE-0003"
+      ],
+      "assessment_refs": [
+        "ASSESSMENT-0002"
+      ]
+    }
+  ],
+  "reconciliation_state": "partial",
+  "basis": [
+    "both opinions agree on the existence of authenticated access",
+    "both opinions agree that watermark reproducibility is contested",
+    "the auditors disagree about the residual evidentiary weight of the original watermark observation",
+    "causal downstream training use remains unresolved"
+  ],
+  "limitations": [
+    "the reconciliation does not resolve causal training use",
+    "numerical agreement is not treated as an automatic verdict"
+  ],
+  "effect_scope": "audit_only",
+  "created_at": "2026-09-07T02:15:00Z"
+}

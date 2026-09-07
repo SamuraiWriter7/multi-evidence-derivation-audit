@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.org/meda/v0.4/audit-case-record.schema.json",
+  "$id": "https://example.org/meda/v0.5/audit-case-record.schema.json",
   "title": "Audit Case Record",
-  "description": "A case-level envelope that groups evidence, evidence relationships, evidence fusion records, derivation assessments, attestations, challenges, reproductions, and assessment revisions belonging to the same origin-derivative audit context.",
+  "description": "A case-level envelope that groups the complete MEDA audit history, including evidence, relationships, fusion, assessments, attestations, challenges, reproductions, revisions, auditor opinions, reconciliation records, and external handoffs.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -19,6 +19,9 @@
     "challenge_refs",
     "reproduction_refs",
     "revision_refs",
+    "opinion_refs",
+    "reconciliation_refs",
+    "handoff_refs",
     "current_assessment_ref",
     "protocol_version",
     "created_at",
@@ -27,7 +30,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "case_id": {
       "type": "string",
@@ -52,79 +55,109 @@
         "reproducing",
         "revision_pending",
         "disputed",
+        "reconciling",
+        "handoff_ready",
+        "handed_off",
         "closed"
       ]
     },
     "evidence_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "relationship_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "fusion_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "assessment_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "attestation_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "challenge_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "reproduction_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
-      "uniqueItems": true,
       "default": []
     },
     "revision_refs": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "minLength": 1
       },
+      "default": []
+    },
+    "opinion_refs": {
+      "type": "array",
       "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "reconciliation_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "handoff_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "default": []
     },
     "current_assessment_ref": {
@@ -141,7 +174,7 @@
     },
     "protocol_version": {
       "type": "string",
-      "const": "0.4.0"
+      "const": "0.5.0"
     },
     "created_at": {
       "type": "string",
@@ -161,6 +194,9 @@
               "assessed",
               "revision_pending",
               "disputed",
+              "reconciling",
+              "handoff_ready",
+              "handed_off",
               "closed"
             ]
           }
@@ -217,6 +253,70 @@
       "then": {
         "properties": {
           "revision_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_state": {
+            "enum": [
+              "reconciling",
+              "handoff_ready",
+              "handed_off"
+            ]
+          }
+        },
+        "required": [
+          "case_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "opinion_refs": {
+            "minItems": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_state": {
+            "enum": [
+              "handoff_ready",
+              "handed_off"
+            ]
+          }
+        },
+        "required": [
+          "case_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "reconciliation_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_state": {
+            "const": "handed_off"
+          }
+        },
+        "required": [
+          "case_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "handoff_refs": {
             "minItems": 1
           }
         }

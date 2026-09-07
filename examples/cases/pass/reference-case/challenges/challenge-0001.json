@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "challenge_id": "CHALLENGE-0001",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -8,9 +8,8 @@
   "target_record_ref": "ASSESSMENT-0001",
   "challenge_scope": "confidence",
   "challenge_basis": [
-    "ASSESSMENT-0001 places material weight on EVIDENCE-0001",
-    "the watermark observation had not yet been independently reproduced",
-    "the declared assessment confidence may therefore overstate the evidentiary stability of the watermark component"
+    "ASSESSMENT-0001 placed material weight on EVIDENCE-0001",
+    "the watermark result had not yet been independently reproduced"
   ],
   "related_evidence_refs": [
     "EVIDENCE-0001"
@@ -21,7 +20,7 @@
   "requested_action": "reproduce",
   "raised_by": "REVIEWER:independent-party",
   "challenge_status": "resolved",
-  "resolution_note": "The challenge triggered REPRODUCTION-0001. The reproduction did not reproduce the original watermark signal, new counter-evidence was incorporated into FUSION-0002, and ASSESSMENT-0002 was issued.",
-  "raised_at": "2026-09-06T00:50:00Z",
-  "resolved_at": "2026-09-06T01:50:00Z"
+  "resolution_note": "The challenge triggered REPRODUCTION-0001 and resulted in a revised assessment.",
+  "raised_at": "2026-09-07T00:50:00Z",
+  "resolved_at": "2026-09-07T01:50:00Z"
 }

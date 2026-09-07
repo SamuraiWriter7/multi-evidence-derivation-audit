@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "evidence_id": "EVIDENCE-0002",
   "evidence_type": "signed_receipt",
@@ -21,18 +21,18 @@
     "ARTIFACT:signed-api-receipt-9918"
   ],
   "assumptions": [
-    "the signing key was controlled by the declared API provider at the recorded event time",
+    "the signing key was controlled by the declared API provider",
     "the receipt has not been revoked"
   ],
   "limitations": [
-    "the receipt establishes an access event but does not prove that returned outputs were used for training",
-    "the receipt does not independently establish causal model derivation"
+    "the receipt establishes an access event but not downstream training use",
+    "the receipt does not independently establish causal derivation"
   ],
   "artifact_refs": [
     "ARTIFACT:signed-api-receipt-9918",
     "ARTIFACT:signature-verification-result-9918"
   ],
-  "collected_at": "2026-09-06T00:10:00Z",
+  "collected_at": "2026-09-07T00:10:00Z",
   "collected_by": "AUDITOR:reference-node",
   "integrity": {
     "algorithm": "sha256",

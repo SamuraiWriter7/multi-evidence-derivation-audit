@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.4.0",
+  "schema_version": "0.5.0",
   "case_ref": "CASE-0001",
   "assessment_id": "ASSESSMENT-0002",
   "origin_ref": "MODEL:origin-alpha:v1",
@@ -18,21 +18,18 @@
   "confidence": 0.58,
   "assessment_basis": [
     "FUSION-0002 identified a materially conflicted evidentiary picture",
-    "authenticated access and behavioral similarity evidence continue to support a possible derivation relationship",
     "the independent reproduction did not reproduce the original watermark signal",
-    "the watermark component of the original assessment therefore remains materially contested",
-    "further evidence or reproduction is required before a stronger protocol-level assessment is justified"
+    "further review is required"
   ],
   "conflicting_evidence_refs": [
     "EVIDENCE-0005"
   ],
   "limitations": [
-    "the failed reproduction does not independently invalidate EVIDENCE-0001",
-    "complete training records remain unavailable",
-    "the assessment does not determine infringement or royalty obligation"
+    "failed reproduction does not automatically invalidate EVIDENCE-0001",
+    "complete training records remain unavailable"
   ],
-  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.4-reference",
+  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.5-reference",
   "legal_effect": "human_review_required",
-  "protocol_version": "0.4.0",
-  "created_at": "2026-09-06T01:35:00Z"
+  "protocol_version": "0.5.0",
+  "created_at": "2026-09-07T01:35:00Z"
 }

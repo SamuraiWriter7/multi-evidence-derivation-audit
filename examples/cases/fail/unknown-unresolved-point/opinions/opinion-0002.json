@@ -1,0 +1,53 @@
+{
+  "schema_version": "0.5.0",
+  "case_ref": "CASE-0001",
+  "opinion_id": "OPINION-0002",
+  "auditor_ref": "AUDITOR:panel-member-b",
+  "auditor_type": "human",
+  "organization_ref": "ORG:independent-audit-panel",
+  "credential_refs": [
+    "CREDENTIAL:audit-review-v1"
+  ],
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "assessment_ref": "ASSESSMENT-0002",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0004",
+    "EVIDENCE-0005"
+  ],
+  "fusion_refs": [
+    "FUSION-0002"
+  ],
+  "challenge_refs": [
+    "CHALLENGE-0001"
+  ],
+  "reproduction_refs": [
+    "REPRODUCTION-0001"
+  ],
+  "position": "disputes",
+  "confidence": 0.57,
+  "independence_status": "independent",
+  "dependency_refs": [],
+  "opinion_basis": [
+    "the original watermark observation was not independently reproduced",
+    "behavioral similarity does not uniquely establish causal derivation",
+    "authenticated access establishes access but not training incorporation"
+  ],
+  "agreed_points": [
+    "an authenticated API access event occurred",
+    "the watermark evidence is materially contested"
+  ],
+  "disputed_points": [
+    "the existing evidence is insufficient to support a stable derivation conclusion"
+  ],
+  "unresolved_points": [
+    "whether accessed outputs entered downstream training remains unresolved"
+  ],
+  "limitations": [
+    "absence of complete training records prevents stronger conclusions"
+  ],
+  "effect_scope": "audit_only",
+  "created_at": "2026-09-07T02:05:00Z"
+}

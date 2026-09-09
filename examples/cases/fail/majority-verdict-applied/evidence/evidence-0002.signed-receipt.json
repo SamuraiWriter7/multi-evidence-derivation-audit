@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.5.0",
+  "case_ref": "CASE-0001",
+  "evidence_id": "EVIDENCE-0002",
+  "evidence_type": "signed_receipt",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "method": "cryptographically signed API usage receipt",
+  "maturity": "established",
+  "observation": {
+    "signature_valid": true,
+    "request_authenticated": true,
+    "receipt_version": "1.0.0",
+    "usage_event": "model_output_request"
+  },
+  "statistic": null,
+  "threshold": null,
+  "calibration_ref": null,
+  "source_event_ref": "EVENT:api-call-9918",
+  "source_artifact_refs": [
+    "ARTIFACT:signed-api-receipt-9918"
+  ],
+  "assumptions": [
+    "the signing key was controlled by the declared API provider",
+    "the receipt has not been revoked"
+  ],
+  "limitations": [
+    "the receipt establishes an access event but not downstream training use",
+    "the receipt does not independently establish causal derivation"
+  ],
+  "artifact_refs": [
+    "ARTIFACT:signed-api-receipt-9918",
+    "ARTIFACT:signature-verification-result-9918"
+  ],
+  "collected_at": "2026-09-07T00:10:00Z",
+  "collected_by": "AUDITOR:reference-node",
+  "integrity": {
+    "algorithm": "sha256",
+    "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "challenge_status": "unchallenged"
+}

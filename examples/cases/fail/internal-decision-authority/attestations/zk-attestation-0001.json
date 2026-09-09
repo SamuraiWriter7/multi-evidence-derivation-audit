@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.5.0",
+  "case_ref": "CASE-0001",
+  "attestation_id": "ZK-ATTESTATION-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "predicate": "The original committed evidence set was evaluated under the declared fusion predicate and produced FUSION-0001.",
+  "predicate_version": "fusion-audit-predicate-v1",
+  "audit_context_type": "fusion",
+  "audit_context_ref": "FUSION-0001",
+  "proof_system": "reference-zk-proof-system",
+  "public_inputs": {
+    "case_ref": "CASE-0001",
+    "origin_ref": "MODEL:origin-alpha:v1",
+    "derivative_ref": "MODEL:student-beta:v1",
+    "fusion_ref": "FUSION-0001",
+    "fusion_result": "strong_support",
+    "protocol_version": "0.5.0"
+  },
+  "committed_inputs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004",
+    "REL-0001",
+    "REL-0002"
+  ],
+  "proof_ref": "PROOF:zk-audit-fusion-0001",
+  "verification_method_ref": "VERIFIER-METHOD:reference-v1",
+  "verifier_ref": "VERIFIER:reference-node",
+  "verification_status": "verified",
+  "scope_note": "This attestation proves only the declared fusion predicate and does not prevent later challenge, reproduction, reconciliation, handoff, or external review.",
+  "created_at": "2026-09-07T00:45:00Z"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.5.0",
+  "case_ref": "CASE-0001",
+  "assessment_id": "ASSESSMENT-0001",
+  "origin_ref": "MODEL:origin-alpha:v1",
+  "derivative_ref": "MODEL:student-beta:v1",
+  "evidence_refs": [
+    "EVIDENCE-0001",
+    "EVIDENCE-0002",
+    "EVIDENCE-0003",
+    "EVIDENCE-0004"
+  ],
+  "fusion_refs": [
+    "FUSION-0001"
+  ],
+  "assessment_state": "supported",
+  "confidence": 0.86,
+  "assessment_basis": [
+    "FUSION-0001 produced strong protocol-level support",
+    "no material counter-evidence was available at that time"
+  ],
+  "conflicting_evidence_refs": [],
+  "limitations": [
+    "the assessment does not establish copyright infringement"
+  ],
+  "assessment_policy_ref": "ASSESSMENT-POLICY:MEDA-v0.5-reference",
+  "legal_effect": "policy_dependent",
+  "protocol_version": "0.5.0",
+  "created_at": "2026-09-07T00:40:00Z"
+}
